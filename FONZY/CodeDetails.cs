@@ -24,7 +24,7 @@ namespace FONZY
         /// <param name="e"></param>
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            this.Close()
+            this.Close();
         }
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace FONZY
         private void ProceedButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            PaymentType paymentType = new PaymentType();
-            paymentType.ShowDialog();
+            PaymentAndCustomerType paymentAndCustomerType = new PaymentAndCustomerType();
+            paymentAndCustomerType.ShowDialog();
         }
     }
 }

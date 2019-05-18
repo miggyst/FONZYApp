@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace FONZY
 {
-	public partial class PaymentType : Form
+	public partial class PaymentCalculator : Form
 	{
-		public PaymentType()
+		public PaymentCalculator()
 		{
 			InitializeComponent();
 		}

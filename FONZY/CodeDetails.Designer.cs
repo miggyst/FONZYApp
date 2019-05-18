@@ -106,7 +106,7 @@
             // 
             // proceedButton
             // 
-            this.proceedButton.Location = new System.Drawing.Point(28, 144);
+            this.proceedButton.Location = new System.Drawing.Point(25, 126);
             this.proceedButton.Name = "proceedButton";
             this.proceedButton.Size = new System.Drawing.Size(75, 23);
             this.proceedButton.TabIndex = 8;
@@ -116,7 +116,7 @@
             // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(207, 144);
+            this.exitButton.Location = new System.Drawing.Point(207, 126);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(75, 23);
             this.exitButton.TabIndex = 9;
@@ -128,7 +128,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 181);
+            this.ClientSize = new System.Drawing.Size(314, 161);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.proceedButton);
             this.Controls.Add(this.oscaTextBox);
