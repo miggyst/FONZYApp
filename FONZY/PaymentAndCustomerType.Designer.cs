@@ -32,8 +32,14 @@
             this.paymentAndCustomerTypeButton = new System.Windows.Forms.Button();
             this.paymentTypeLabel = new System.Windows.Forms.Label();
             this.customerTypeLabel = new System.Windows.Forms.Label();
-            this.customerTypeCheckBox = new System.Windows.Forms.CheckedListBox();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.customerTypeGroupBox = new System.Windows.Forms.GroupBox();
+            this.customerTypeNonStatIntern = new System.Windows.Forms.RadioButton();
+            this.customerTypeGuest = new System.Windows.Forms.RadioButton();
+            this.customerTypeEmployee = new System.Windows.Forms.RadioButton();
+            this.customerTypeOld = new System.Windows.Forms.RadioButton();
+            this.customerTypeNew = new System.Windows.Forms.RadioButton();
+            this.customerTypeGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // paymentTypeCheckBox
@@ -49,6 +55,7 @@
             this.paymentTypeCheckBox.Name = "paymentTypeCheckBox";
             this.paymentTypeCheckBox.Size = new System.Drawing.Size(110, 79);
             this.paymentTypeCheckBox.TabIndex = 0;
+            this.paymentTypeCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.PaymentTypeCheckBox_ItemCheck);
             // 
             // paymentAndCustomerTypeButton
             // 
@@ -78,20 +85,6 @@
             this.customerTypeLabel.TabIndex = 3;
             this.customerTypeLabel.Text = "Customer Type";
             // 
-            // customerTypeCheckBox
-            // 
-            this.customerTypeCheckBox.FormattingEnabled = true;
-            this.customerTypeCheckBox.Items.AddRange(new object[] {
-            "New",
-            "Old",
-            "Employee",
-            "Guest",
-            "Non-stat/Intern"});
-            this.customerTypeCheckBox.Location = new System.Drawing.Point(12, 46);
-            this.customerTypeCheckBox.Name = "customerTypeCheckBox";
-            this.customerTypeCheckBox.Size = new System.Drawing.Size(110, 79);
-            this.customerTypeCheckBox.TabIndex = 4;
-            // 
             // cancelButton
             // 
             this.cancelButton.Location = new System.Drawing.Point(158, 142);
@@ -102,19 +95,88 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
+            // customerTypeGroupBox
+            // 
+            this.customerTypeGroupBox.Controls.Add(this.customerTypeNonStatIntern);
+            this.customerTypeGroupBox.Controls.Add(this.customerTypeGuest);
+            this.customerTypeGroupBox.Controls.Add(this.customerTypeEmployee);
+            this.customerTypeGroupBox.Controls.Add(this.customerTypeOld);
+            this.customerTypeGroupBox.Controls.Add(this.customerTypeNew);
+            this.customerTypeGroupBox.Location = new System.Drawing.Point(12, 36);
+            this.customerTypeGroupBox.Name = "customerTypeGroupBox";
+            this.customerTypeGroupBox.Size = new System.Drawing.Size(110, 100);
+            this.customerTypeGroupBox.TabIndex = 7;
+            this.customerTypeGroupBox.TabStop = false;
+            // 
+            // customerTypeNonStatIntern
+            // 
+            this.customerTypeNonStatIntern.AutoSize = true;
+            this.customerTypeNonStatIntern.Location = new System.Drawing.Point(6, 74);
+            this.customerTypeNonStatIntern.Name = "customerTypeNonStatIntern";
+            this.customerTypeNonStatIntern.Size = new System.Drawing.Size(97, 17);
+            this.customerTypeNonStatIntern.TabIndex = 4;
+            this.customerTypeNonStatIntern.Text = "Non-stat/Intern";
+            this.customerTypeNonStatIntern.UseVisualStyleBackColor = true;
+            // 
+            // customerTypeGuest
+            // 
+            this.customerTypeGuest.AutoSize = true;
+            this.customerTypeGuest.Location = new System.Drawing.Point(6, 58);
+            this.customerTypeGuest.Name = "customerTypeGuest";
+            this.customerTypeGuest.Size = new System.Drawing.Size(53, 17);
+            this.customerTypeGuest.TabIndex = 3;
+            this.customerTypeGuest.Text = "Guest";
+            this.customerTypeGuest.UseVisualStyleBackColor = true;
+            // 
+            // customerTypeEmployee
+            // 
+            this.customerTypeEmployee.AutoSize = true;
+            this.customerTypeEmployee.Location = new System.Drawing.Point(6, 42);
+            this.customerTypeEmployee.Name = "customerTypeEmployee";
+            this.customerTypeEmployee.Size = new System.Drawing.Size(71, 17);
+            this.customerTypeEmployee.TabIndex = 2;
+            this.customerTypeEmployee.Text = "Employee";
+            this.customerTypeEmployee.UseVisualStyleBackColor = true;
+            // 
+            // customerTypeOld
+            // 
+            this.customerTypeOld.AutoSize = true;
+            this.customerTypeOld.Location = new System.Drawing.Point(6, 26);
+            this.customerTypeOld.Name = "customerTypeOld";
+            this.customerTypeOld.Size = new System.Drawing.Size(41, 17);
+            this.customerTypeOld.TabIndex = 1;
+            this.customerTypeOld.Text = "Old";
+            this.customerTypeOld.UseVisualStyleBackColor = true;
+            // 
+            // customerTypeNew
+            // 
+            this.customerTypeNew.AutoSize = true;
+            this.customerTypeNew.Checked = true;
+            this.customerTypeNew.Cursor = System.Windows.Forms.Cursors.Default;
+            this.customerTypeNew.Location = new System.Drawing.Point(6, 10);
+            this.customerTypeNew.Name = "customerTypeNew";
+            this.customerTypeNew.Size = new System.Drawing.Size(47, 17);
+            this.customerTypeNew.TabIndex = 0;
+            this.customerTypeNew.TabStop = true;
+            this.customerTypeNew.Text = "New";
+            this.customerTypeNew.UseVisualStyleBackColor = true;
+            // 
             // PaymentAndCustomerType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 181);
+            this.Controls.Add(this.customerTypeGroupBox);
             this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.customerTypeCheckBox);
             this.Controls.Add(this.customerTypeLabel);
             this.Controls.Add(this.paymentTypeLabel);
             this.Controls.Add(this.paymentAndCustomerTypeButton);
             this.Controls.Add(this.paymentTypeCheckBox);
             this.Name = "PaymentAndCustomerType";
             this.Text = "Payment and Customer Type";
+            this.Load += new System.EventHandler(this.PaymentAndCustomerType_Load);
+            this.customerTypeGroupBox.ResumeLayout(false);
+            this.customerTypeGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,7 +188,12 @@
         private System.Windows.Forms.Button paymentAndCustomerTypeButton;
         private System.Windows.Forms.Label paymentTypeLabel;
         private System.Windows.Forms.Label customerTypeLabel;
-        private System.Windows.Forms.CheckedListBox customerTypeCheckBox;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.GroupBox customerTypeGroupBox;
+        private System.Windows.Forms.RadioButton customerTypeEmployee;
+        private System.Windows.Forms.RadioButton customerTypeOld;
+        private System.Windows.Forms.RadioButton customerTypeNew;
+        private System.Windows.Forms.RadioButton customerTypeNonStatIntern;
+        private System.Windows.Forms.RadioButton customerTypeGuest;
     }
 }
