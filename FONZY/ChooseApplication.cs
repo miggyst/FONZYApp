@@ -19,12 +19,12 @@ namespace FONZY
 		}
 
         /// <summary>
-        /// transaction button that specifies that the application will be in
-        /// Transaction mode, and will be redirected to ChooseMasterFile form
+        /// inventory button that specifies that the application will be in
+        /// Inventory Mode, and will be redirected to ChooseMasterFile form
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TransactionButton_Click(object sender, EventArgs e)
+        private void InventoryButton_Click(object sender, EventArgs e)
         {
             this.Close();
             ChooseMasterFile chooseMasterFile = new ChooseMasterFile();
@@ -32,12 +32,12 @@ namespace FONZY
         }
 
         /// <summary>
-        /// inventory button that specifies that the application will be in
-        /// Inventory Mode, and will be redirected to ChooseMasterFile form
+        /// transaction button that specifies that the application will be in
+        /// Transaction mode, and will be redirected to ChooseMasterFile form
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void InventoryButton_Click(object sender, EventArgs e)
+        private void TransactionButton_Click(object sender, EventArgs e)
         {
             this.Close();
             ChooseMasterFile chooseMasterFile = new ChooseMasterFile();

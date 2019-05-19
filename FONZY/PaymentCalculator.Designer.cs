@@ -156,6 +156,7 @@
             this.totalAmountTextBox.ReadOnly = true;
             this.totalAmountTextBox.Size = new System.Drawing.Size(100, 20);
             this.totalAmountTextBox.TabIndex = 11;
+            this.totalAmountTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // cashTextBox
             // 
@@ -163,6 +164,9 @@
             this.cashTextBox.Name = "cashTextBox";
             this.cashTextBox.Size = new System.Drawing.Size(100, 20);
             this.cashTextBox.TabIndex = 12;
+            this.cashTextBox.Text = "0";
+            this.cashTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.cashTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CashTextBox_KeyPress);
             // 
             // creditTextBox
             // 
@@ -170,6 +174,9 @@
             this.creditTextBox.Name = "creditTextBox";
             this.creditTextBox.Size = new System.Drawing.Size(100, 20);
             this.creditTextBox.TabIndex = 13;
+            this.creditTextBox.Text = "0";
+            this.creditTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.creditTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CreditTextBox_KeyPress);
             // 
             // debitTextBox
             // 
@@ -177,6 +184,9 @@
             this.debitTextBox.Name = "debitTextBox";
             this.debitTextBox.Size = new System.Drawing.Size(100, 20);
             this.debitTextBox.TabIndex = 14;
+            this.debitTextBox.Text = "0";
+            this.debitTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.debitTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DebitTextBox_KeyPress);
             // 
             // checkTextBox
             // 
@@ -184,6 +194,9 @@
             this.checkTextBox.Name = "checkTextBox";
             this.checkTextBox.Size = new System.Drawing.Size(100, 20);
             this.checkTextBox.TabIndex = 15;
+            this.checkTextBox.Text = "0";
+            this.checkTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.checkTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckTextBox_KeyPress);
             // 
             // salaryDeductionTextBox
             // 
@@ -191,6 +204,9 @@
             this.salaryDeductionTextBox.Name = "salaryDeductionTextBox";
             this.salaryDeductionTextBox.Size = new System.Drawing.Size(100, 20);
             this.salaryDeductionTextBox.TabIndex = 16;
+            this.salaryDeductionTextBox.Text = "0";
+            this.salaryDeductionTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.salaryDeductionTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SalaryDeductionTextBox_KeyPress);
             // 
             // totalCustomerPaymentTextBox
             // 
@@ -199,6 +215,7 @@
             this.totalCustomerPaymentTextBox.ReadOnly = true;
             this.totalCustomerPaymentTextBox.Size = new System.Drawing.Size(187, 20);
             this.totalCustomerPaymentTextBox.TabIndex = 17;
+            this.totalCustomerPaymentTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // changeTextBox
             // 
@@ -207,6 +224,7 @@
             this.changeTextBox.ReadOnly = true;
             this.changeTextBox.Size = new System.Drawing.Size(186, 20);
             this.changeTextBox.TabIndex = 18;
+            this.changeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // PaymentCalculator
             // 
@@ -234,6 +252,8 @@
             this.Controls.Add(this.totalAmountLabel);
             this.Name = "PaymentCalculator";
             this.Text = "Payment Calculator";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PaymentCalculator_FormClosing);
+            this.Load += new System.EventHandler(this.PaymentCalculator_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

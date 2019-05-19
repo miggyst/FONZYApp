@@ -32,7 +32,8 @@
             this.paymentAndCustomerTypeButton = new System.Windows.Forms.Button();
             this.paymentTypeLabel = new System.Windows.Forms.Label();
             this.customerTypeLabel = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.customerTypeCheckBox = new System.Windows.Forms.CheckedListBox();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // paymentTypeCheckBox
@@ -51,7 +52,7 @@
             // 
             // paymentAndCustomerTypeButton
             // 
-            this.paymentAndCustomerTypeButton.Location = new System.Drawing.Point(100, 142);
+            this.paymentAndCustomerTypeButton.Location = new System.Drawing.Point(47, 142);
             this.paymentAndCustomerTypeButton.Name = "paymentAndCustomerTypeButton";
             this.paymentAndCustomerTypeButton.Size = new System.Drawing.Size(75, 23);
             this.paymentAndCustomerTypeButton.TabIndex = 1;
@@ -62,7 +63,7 @@
             // paymentTypeLabel
             // 
             this.paymentTypeLabel.AutoSize = true;
-            this.paymentTypeLabel.Location = new System.Drawing.Point(30, 21);
+            this.paymentTypeLabel.Location = new System.Drawing.Point(175, 20);
             this.paymentTypeLabel.Name = "paymentTypeLabel";
             this.paymentTypeLabel.Size = new System.Drawing.Size(75, 13);
             this.paymentTypeLabel.TabIndex = 2;
@@ -71,32 +72,43 @@
             // customerTypeLabel
             // 
             this.customerTypeLabel.AutoSize = true;
-            this.customerTypeLabel.Location = new System.Drawing.Point(178, 21);
+            this.customerTypeLabel.Location = new System.Drawing.Point(30, 20);
             this.customerTypeLabel.Name = "customerTypeLabel";
             this.customerTypeLabel.Size = new System.Drawing.Size(78, 13);
             this.customerTypeLabel.TabIndex = 3;
             this.customerTypeLabel.Text = "Customer Type";
             // 
-            // checkedListBox1
+            // customerTypeCheckBox
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
+            this.customerTypeCheckBox.FormattingEnabled = true;
+            this.customerTypeCheckBox.Items.AddRange(new object[] {
             "New",
             "Old",
             "Employee",
             "Guest",
             "Non-stat/Intern"});
-            this.checkedListBox1.Location = new System.Drawing.Point(12, 46);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(110, 79);
-            this.checkedListBox1.TabIndex = 4;
+            this.customerTypeCheckBox.Location = new System.Drawing.Point(12, 46);
+            this.customerTypeCheckBox.Name = "customerTypeCheckBox";
+            this.customerTypeCheckBox.Size = new System.Drawing.Size(110, 79);
+            this.customerTypeCheckBox.TabIndex = 4;
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(158, 142);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 5;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // PaymentAndCustomerType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 181);
-            this.Controls.Add(this.checkedListBox1);
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.customerTypeCheckBox);
             this.Controls.Add(this.customerTypeLabel);
             this.Controls.Add(this.paymentTypeLabel);
             this.Controls.Add(this.paymentAndCustomerTypeButton);
@@ -114,6 +126,7 @@
         private System.Windows.Forms.Button paymentAndCustomerTypeButton;
         private System.Windows.Forms.Label paymentTypeLabel;
         private System.Windows.Forms.Label customerTypeLabel;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox customerTypeCheckBox;
+        private System.Windows.Forms.Button cancelButton;
     }
 }

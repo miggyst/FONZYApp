@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,6 +17,55 @@ namespace FONZY
 		{
 			InitializeComponent();
 		}
+
+        /// <summary>
+        /// enables or disables the text boxes based on whether or not
+        /// the preceeding identifiers were toggled on the PaymentAndCustomerType form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PaymentCalculator_Load(object sender, EventArgs e)
+        {
+            if (GlobalUtilities.getCashPaymentIdentifier() != true)
+            {
+                cashTextBox.ReadOnly = true;
+            }
+
+            if (GlobalUtilities.getCreditPaymentIdentifier() != true)
+            {
+                creditTextBox.ReadOnly = true;
+            }
+
+            if (GlobalUtilities.getDebitPaymentIdentifier() != true)
+            {
+                debitTextBox.ReadOnly = true;
+            }
+
+            if (GlobalUtilities.getCheckPaymentIdentifier() != true)
+            {
+                checkTextBox.ReadOnly = true;
+            }
+
+            if (GlobalUtilities.getSalaryDeductionPaymentIdentifier() != true)
+            {
+                salaryDeductionTextBox.ReadOnly = true;
+            }
+        }
+
+        /// <summary>
+        /// resets the read only field of Cash, Credit, Debit, Check, and SalaryDeduction text boxes
+        /// when the form is closed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PaymentCalculator_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            cashTextBox.ReadOnly = false;
+            creditTextBox.ReadOnly = false;
+            debitTextBox.ReadOnly = false;
+            checkTextBox.ReadOnly = false;
+            salaryDeductionTextBox.ReadOnly = false;
+        }
 
         /// <summary>
         /// proceed button lets the user to go forth with the workflow
@@ -40,9 +90,140 @@ namespace FONZY
                 PrinterDetails printerDetails = new PrinterDetails();
                 printerDetails.ShowDialog();
             }
-            else
+        }
+
+        /// <summary>
+        /// checks for user input,
+        /// only allows numeric values, one decimal point, and two decimal places
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CashTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Only allows numeric values
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
-                // Do nothing, returns to SaleDetails form
+                e.Handled = true;
+            }
+
+            // Only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+
+            // Only allows two numbers after decimal point
+            if (Regex.IsMatch(cashTextBox.Text, @"\.\d\d") && e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// checks for user input,
+        /// only allows numeric values, one decimal point, and two decimal places
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CreditTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Only allows numeric values
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // Only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+
+            // Only allows two numbers after decimal point
+            if (Regex.IsMatch(creditTextBox.Text, @"\.\d\d") && e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// checks for user input,
+        /// only allows numeric values, one decimal point, and two decimal places
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DebitTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Only allows numeric values
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // Only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+
+            // Only allows two numbers after decimal point
+            if (Regex.IsMatch(debitTextBox.Text, @"\.\d\d") && e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// checks for user input,
+        /// only allows numeric values, one decimal point, and two decimal places
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Only allows numeric values
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // Only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+
+            // Only allows two numbers after decimal point
+            if (Regex.IsMatch(checkTextBox.Text, @"\.\d\d") && e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// checks for user input,
+        /// only allows numeric values, one decimal point, and two decimal places
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SalaryDeductionTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Only allows numeric values
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // Only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+
+            // Only allows two numbers after decimal point
+            if (Regex.IsMatch(salaryDeductionTextBox.Text, @"\.\d\d") && e.KeyChar != 8)
+            {
+                e.Handled = true;
             }
         }
     }

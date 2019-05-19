@@ -141,6 +141,7 @@
             this.Controls.Add(this.tinLabel);
             this.Name = "CodeDetails";
             this.Text = "Code Details";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CodeDetails_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

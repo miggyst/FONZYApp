@@ -21,7 +21,11 @@ namespace FONZY
         private static string customerBusinessStyle;
         private static string customerTerms;
         private static string customerOSCA;
-        private static string customerType;
+        private static bool customerTypeNew;
+        private static bool customerTypeOld;
+        private static bool customerTypeEmployee;
+        private static bool customerTypeGuest;
+        private static bool customerTypeNonStatIntern;
 
         // Customer order data
         private static Dictionary<string, List<string>> customerTransactionDictionary = new Dictionary<string, List<string>>();
@@ -44,6 +48,8 @@ namespace FONZY
         //----- Public functions -----//
         GlobalUtilities()
         {
+            // MIGHT NEED TO DELETE THIS CONSTRUCTOR!!
+            // Payment Constructor
             cashPayment = 0f;
             creditPayment = 0f;
             debitPayment = 0f;
@@ -52,6 +58,7 @@ namespace FONZY
             totalCost = 0f;
             totalChange = 0f;
         }
+
         //--- GETters ---//
         public static string getCashierName() { return cashierName; }
 
@@ -73,7 +80,15 @@ namespace FONZY
 
         public static string getCustomerOSCA() { return customerOSCA; }
 
-        public static string getCustomerType() { return customerType; }
+        public static bool getCustomerTypeNew() { return customerTypeNew; }
+
+        public static bool getCustomerTypeOld() { return customerTypeOld; }
+
+        public static bool getCustomerTypeEmployee() { return customerTypeEmployee; }
+
+        public static bool getCustomerTypeGuest() { return customerTypeGuest; }
+
+        public static bool getCustomerTypeNonStatIntern() { return customerTypeNonStatIntern; }
 
         public static bool getCashPaymentIdentifier() { return cashPaymentIdentifier; }
 
@@ -191,12 +206,48 @@ namespace FONZY
         }
 
         /// <summary>
-        /// SETter for customer type
+        /// SETter for customer type new
         /// </summary>
-        /// <param name="userInputCustomerType">customer type</param>
-        public static void setCustomerType(string userInputCustomerType)
+        /// <param name="userInputCustomerTypeNew">state of customer type of New</param>
+        public static void setCustomerTypeNew(bool userInputCustomerTypeNew)
         {
-            customerType = userInputCustomerType;
+            customerTypeNew = userInputCustomerTypeNew;
+        }
+
+        /// <summary>
+        /// SETter for customer type old
+        /// </summary>
+        /// <param name="userInputCustomerTypeNew">state of customer type of Old</param>
+        public static void setCustomerTypeOld(bool userInputCustomerTypeOld)
+        {
+            customerTypeOld = userInputCustomerTypeOld;
+        }
+
+        /// <summary>
+        /// SETter for customer type employee
+        /// </summary>
+        /// <param name="userInputCustomerTypeEmployee">state of customer type of Employee</param>
+        public static void setCustomerTypeEmployee(bool userInputCustomerTypeEmployee)
+        {
+            customerTypeEmployee = userInputCustomerTypeEmployee;
+        }
+
+        /// <summary>
+        /// SETter for customer type guest
+        /// </summary>
+        /// <param name="userInputCustomerTypeGuest">state of customer type of Guest</param>
+        public static void setCustomerTypeGuest(bool userInputCustomerTypeGuest)
+        {
+            customerTypeGuest = userInputCustomerTypeGuest;
+        }
+
+        /// <summary>
+        /// SETter for customer type nonstat/intern
+        /// </summary>
+        /// <param name="userInputCustomerTypeNew">state of customer type of Non-stat/Intern</param>
+        public static void setCustomerTypeNonStatIntern(bool userInputCustomerTypeNonStatIntern)
+        {
+            customerTypeNonStatIntern = userInputCustomerTypeNonStatIntern;
         }
 
         /// <summary>
@@ -320,6 +371,18 @@ namespace FONZY
             // need to check for duplicate lists in dictionary
             List<string> dictionaryList = new List<string> { userInputOrderProductDescription, userInputOrderPrice, userInputOrderQuantity, userInputOrderDiscount, userInputOrderAmount };
             customerTransactionDictionary.Add(userInputOrderBarCode, dictionaryList);
+        }
+
+        /// <summary>
+        /// resets the payment identifiers to default
+        /// </summary>
+        public static void resetPaymentIdentifiers()
+        {
+            setCashPaymentIdentifier(false);
+            setCreditPaymentIdentifier(false);
+            setDebitPaymentIdentifier(false);
+            setCheckPaymentIdentifier(false);
+            setSalaryDeductionPaymentIdentifier(false);
         }
     }
 }

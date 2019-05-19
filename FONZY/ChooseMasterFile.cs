@@ -26,12 +26,17 @@ namespace FONZY
         /// <param name="e"></param>
         private void MasterFileButton_Click(object sender, EventArgs e)
         {
-            //NEED TO ADD FILE EXPLORER HERE
-            //code for now
+            // Opens file explorer and stores filename to global utilities
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Excel Worksheets|*.xls; *.xlsx";
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                GlobalUtilities.setFilePath(openFileDialog.FileName);
+            }
+
             this.Close();
             CashierAndEventInfo cashierAndEventInfo = new CashierAndEventInfo();
             cashierAndEventInfo.ShowDialog();
-            //Add global utilities call here
         }
     }
 }

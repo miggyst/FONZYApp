@@ -59,6 +59,7 @@
             this.cashierNameTextBox.Name = "cashierNameTextBox";
             this.cashierNameTextBox.Size = new System.Drawing.Size(181, 20);
             this.cashierNameTextBox.TabIndex = 2;
+            this.cashierNameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.cashierNameTextBoxValidating);
             // 
             // eventNameTextBox
             // 
@@ -66,6 +67,7 @@
             this.eventNameTextBox.Name = "eventNameTextBox";
             this.eventNameTextBox.Size = new System.Drawing.Size(181, 20);
             this.eventNameTextBox.TabIndex = 3;
+            this.eventNameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.eventNameTextBoxValidating);
             // 
             // cashierAndEventButton
             // 
@@ -89,6 +91,7 @@
             this.Controls.Add(this.cashierNameLabel);
             this.Name = "CashierAndEventInfo";
             this.Text = "Cashier and Event";
+            this.Load += new System.EventHandler(this.CashierAndEventInfo_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

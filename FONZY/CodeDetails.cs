@@ -37,8 +37,22 @@ namespace FONZY
         private void ProceedButton_Click(object sender, EventArgs e)
         {
             this.Close();
+            GlobalUtilities.setCustomerTIN(tinTextBox.Text);
+            GlobalUtilities.setCustomerBusinessStyle(businessStyleTextBox.Text);
+            GlobalUtilities.setCustomerTerms(termsTextBox.Text);
+            GlobalUtilities.setCustomerOSCA(oscaTextBox.Text);
             PaymentAndCustomerType paymentAndCustomerType = new PaymentAndCustomerType();
             paymentAndCustomerType.ShowDialog();
+        }
+
+        /// <summary>
+        /// resets payment identifiers used in PaymentCalculator form upon form closing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CodeDetails_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            GlobalUtilities.resetPaymentIdentifiers();
         }
     }
 }
