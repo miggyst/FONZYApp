@@ -20,12 +20,14 @@ namespace FONZY
 
         /// <summary>
         /// enables or disables the text boxes based on whether or not
-        /// the preceeding identifiers were toggled on the PaymentAndCustomerType form
+        /// the preceeding identifiers were toggled on the PaymentAndCustomerType form,
+        /// also disables the proceedButton to force the user to calculate customer's change
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void PaymentCalculator_Load(object sender, EventArgs e)
         {
+            proceedButton.Enabled = false;
             if (GlobalUtilities.getCashPaymentIdentifier() != true)
             {
                 cashTextBox.ReadOnly = true;
@@ -225,6 +227,29 @@ namespace FONZY
             {
                 e.Handled = true;
             }
+        }
+
+        /// <summary>
+        /// exit button closes the window and goes back to SaleDetails
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// calculates the customer's change (total amount - customer payment),
+        /// this will determine whether or not the cashier can proceed to the next form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CalculateButton_Click(object sender, EventArgs e)
+        {
+            // need to add checks for change before proceeding
+            // code for now
+            proceedButton.Enabled = true;
         }
     }
 }

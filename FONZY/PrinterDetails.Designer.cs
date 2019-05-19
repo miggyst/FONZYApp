@@ -51,6 +51,7 @@
             this.printButton.TabIndex = 1;
             this.printButton.Text = "Print";
             this.printButton.UseVisualStyleBackColor = true;
+            this.printButton.Click += new System.EventHandler(this.PrintButton_Click);
             // 
             // openButton
             // 
@@ -60,6 +61,7 @@
             this.openButton.TabIndex = 2;
             this.openButton.Text = "Open";
             this.openButton.UseVisualStyleBackColor = true;
+            this.openButton.Click += new System.EventHandler(this.OpenButton_Click);
             // 
             // cancelButton
             // 
@@ -69,6 +71,7 @@
             this.cancelButton.TabIndex = 3;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // PrinterDetails
             // 
