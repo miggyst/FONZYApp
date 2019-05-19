@@ -52,7 +52,7 @@
             // totalAmountLabel
             // 
             this.totalAmountLabel.AutoSize = true;
-            this.totalAmountLabel.Location = new System.Drawing.Point(43, 33);
+            this.totalAmountLabel.Location = new System.Drawing.Point(25, 25);
             this.totalAmountLabel.Name = "totalAmountLabel";
             this.totalAmountLabel.Size = new System.Drawing.Size(70, 13);
             this.totalAmountLabel.TabIndex = 0;
@@ -61,7 +61,7 @@
             // cashLabel
             // 
             this.cashLabel.AutoSize = true;
-            this.cashLabel.Location = new System.Drawing.Point(58, 76);
+            this.cashLabel.Location = new System.Drawing.Point(25, 50);
             this.cashLabel.Name = "cashLabel";
             this.cashLabel.Size = new System.Drawing.Size(31, 13);
             this.cashLabel.TabIndex = 1;
@@ -70,7 +70,7 @@
             // creditLabel
             // 
             this.creditLabel.AutoSize = true;
-            this.creditLabel.Location = new System.Drawing.Point(61, 105);
+            this.creditLabel.Location = new System.Drawing.Point(25, 75);
             this.creditLabel.Name = "creditLabel";
             this.creditLabel.Size = new System.Drawing.Size(34, 13);
             this.creditLabel.TabIndex = 2;
@@ -79,7 +79,7 @@
             // debitLabel
             // 
             this.debitLabel.AutoSize = true;
-            this.debitLabel.Location = new System.Drawing.Point(58, 143);
+            this.debitLabel.Location = new System.Drawing.Point(24, 100);
             this.debitLabel.Name = "debitLabel";
             this.debitLabel.Size = new System.Drawing.Size(32, 13);
             this.debitLabel.TabIndex = 3;
@@ -88,7 +88,7 @@
             // checkLabel
             // 
             this.checkLabel.AutoSize = true;
-            this.checkLabel.Location = new System.Drawing.Point(58, 174);
+            this.checkLabel.Location = new System.Drawing.Point(25, 125);
             this.checkLabel.Name = "checkLabel";
             this.checkLabel.Size = new System.Drawing.Size(38, 13);
             this.checkLabel.TabIndex = 4;
@@ -97,7 +97,7 @@
             // salaryDeductionLabel
             // 
             this.salaryDeductionLabel.AutoSize = true;
-            this.salaryDeductionLabel.Location = new System.Drawing.Point(58, 206);
+            this.salaryDeductionLabel.Location = new System.Drawing.Point(24, 150);
             this.salaryDeductionLabel.Name = "salaryDeductionLabel";
             this.salaryDeductionLabel.Size = new System.Drawing.Size(88, 13);
             this.salaryDeductionLabel.TabIndex = 5;
@@ -106,7 +106,7 @@
             // totalCustomerPaymentLabel
             // 
             this.totalCustomerPaymentLabel.AutoSize = true;
-            this.totalCustomerPaymentLabel.Location = new System.Drawing.Point(61, 254);
+            this.totalCustomerPaymentLabel.Location = new System.Drawing.Point(59, 181);
             this.totalCustomerPaymentLabel.Name = "totalCustomerPaymentLabel";
             this.totalCustomerPaymentLabel.Size = new System.Drawing.Size(122, 13);
             this.totalCustomerPaymentLabel.TabIndex = 6;
@@ -115,7 +115,7 @@
             // changeLabel
             // 
             this.changeLabel.AutoSize = true;
-            this.changeLabel.Location = new System.Drawing.Point(61, 289);
+            this.changeLabel.Location = new System.Drawing.Point(93, 229);
             this.changeLabel.Name = "changeLabel";
             this.changeLabel.Size = new System.Drawing.Size(44, 13);
             this.changeLabel.TabIndex = 7;
@@ -123,7 +123,7 @@
             // 
             // calculateButton
             // 
-            this.calculateButton.Location = new System.Drawing.Point(14, 376);
+            this.calculateButton.Location = new System.Drawing.Point(78, 275);
             this.calculateButton.Name = "calculateButton";
             this.calculateButton.Size = new System.Drawing.Size(75, 23);
             this.calculateButton.TabIndex = 8;
@@ -132,16 +132,17 @@
             // 
             // proceedButton
             // 
-            this.proceedButton.Location = new System.Drawing.Point(139, 376);
+            this.proceedButton.Location = new System.Drawing.Point(27, 307);
             this.proceedButton.Name = "proceedButton";
             this.proceedButton.Size = new System.Drawing.Size(75, 23);
             this.proceedButton.TabIndex = 9;
             this.proceedButton.Text = "Proceed";
             this.proceedButton.UseVisualStyleBackColor = true;
+            this.proceedButton.Click += new System.EventHandler(this.ProceedButton_Click);
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(247, 376);
+            this.cancelButton.Location = new System.Drawing.Point(139, 307);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 10;
@@ -150,65 +151,68 @@
             // 
             // totalAmountTextBox
             // 
-            this.totalAmountTextBox.Location = new System.Drawing.Point(125, 33);
+            this.totalAmountTextBox.Location = new System.Drawing.Point(114, 22);
             this.totalAmountTextBox.Name = "totalAmountTextBox";
+            this.totalAmountTextBox.ReadOnly = true;
             this.totalAmountTextBox.Size = new System.Drawing.Size(100, 20);
             this.totalAmountTextBox.TabIndex = 11;
             // 
             // cashTextBox
             // 
-            this.cashTextBox.Location = new System.Drawing.Point(125, 68);
+            this.cashTextBox.Location = new System.Drawing.Point(114, 47);
             this.cashTextBox.Name = "cashTextBox";
             this.cashTextBox.Size = new System.Drawing.Size(100, 20);
             this.cashTextBox.TabIndex = 12;
             // 
             // creditTextBox
             // 
-            this.creditTextBox.Location = new System.Drawing.Point(125, 105);
+            this.creditTextBox.Location = new System.Drawing.Point(114, 72);
             this.creditTextBox.Name = "creditTextBox";
             this.creditTextBox.Size = new System.Drawing.Size(100, 20);
             this.creditTextBox.TabIndex = 13;
             // 
             // debitTextBox
             // 
-            this.debitTextBox.Location = new System.Drawing.Point(125, 143);
+            this.debitTextBox.Location = new System.Drawing.Point(114, 97);
             this.debitTextBox.Name = "debitTextBox";
             this.debitTextBox.Size = new System.Drawing.Size(100, 20);
             this.debitTextBox.TabIndex = 14;
             // 
             // checkTextBox
             // 
-            this.checkTextBox.Location = new System.Drawing.Point(125, 174);
+            this.checkTextBox.Location = new System.Drawing.Point(114, 122);
             this.checkTextBox.Name = "checkTextBox";
             this.checkTextBox.Size = new System.Drawing.Size(100, 20);
             this.checkTextBox.TabIndex = 15;
             // 
             // salaryDeductionTextBox
             // 
-            this.salaryDeductionTextBox.Location = new System.Drawing.Point(125, 206);
+            this.salaryDeductionTextBox.Location = new System.Drawing.Point(114, 147);
             this.salaryDeductionTextBox.Name = "salaryDeductionTextBox";
             this.salaryDeductionTextBox.Size = new System.Drawing.Size(100, 20);
             this.salaryDeductionTextBox.TabIndex = 16;
             // 
             // totalCustomerPaymentTextBox
             // 
-            this.totalCustomerPaymentTextBox.Location = new System.Drawing.Point(125, 246);
+            this.totalCustomerPaymentTextBox.Location = new System.Drawing.Point(27, 197);
             this.totalCustomerPaymentTextBox.Name = "totalCustomerPaymentTextBox";
-            this.totalCustomerPaymentTextBox.Size = new System.Drawing.Size(100, 20);
+            this.totalCustomerPaymentTextBox.ReadOnly = true;
+            this.totalCustomerPaymentTextBox.Size = new System.Drawing.Size(187, 20);
             this.totalCustomerPaymentTextBox.TabIndex = 17;
             // 
             // changeTextBox
             // 
-            this.changeTextBox.Location = new System.Drawing.Point(125, 281);
+            this.changeTextBox.Location = new System.Drawing.Point(28, 245);
             this.changeTextBox.Name = "changeTextBox";
-            this.changeTextBox.Size = new System.Drawing.Size(100, 20);
+            this.changeTextBox.ReadOnly = true;
+            this.changeTextBox.Size = new System.Drawing.Size(186, 20);
             this.changeTextBox.TabIndex = 18;
             // 
             // PaymentCalculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 430);
+            this.ClientSize = new System.Drawing.Size(239, 341);
             this.Controls.Add(this.changeTextBox);
             this.Controls.Add(this.totalCustomerPaymentTextBox);
             this.Controls.Add(this.salaryDeductionTextBox);

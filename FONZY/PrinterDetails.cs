@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace FONZY
 {
-	public partial class Proceed : Form
+	public partial class PrinterDetails : Form
 	{
-		public Proceed()
+		public PrinterDetails()
 		{
 			InitializeComponent();
 		}
