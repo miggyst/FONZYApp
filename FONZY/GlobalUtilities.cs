@@ -44,7 +44,8 @@ namespace FONZY
         private static float totalChange;
 
         // Folder FilePath for saved data
-        private static string filePath;
+        private static string masterFilePath;
+        private static string cashierAndEventFilePath;
 
         //----- Public functions -----//
         //--- GETters ---//
@@ -58,7 +59,9 @@ namespace FONZY
 
         public static string getCustomerContact() { return customerContact; }
 
-        public static string getFilePath() { return filePath; }
+        public static string getMasterFilePath() { return masterFilePath; }
+
+        public static string getCashierAndEventFilePath() { return cashierAndEventFilePath; }
 
         public static string getCustomerTIN() { return customerTIN; }
 
@@ -147,11 +150,21 @@ namespace FONZY
         /// <summary>
         /// SETter for masterfile file path
         /// </summary>
-        /// <param name="userInputFilePath">file path to masterfile</param>
-        public static void setFilePath(string userInputFilePath)
+        /// <param name="userInputMasterFilePath">file path to masterfile</param>
+        public static void setMasterFilePath(string userInputMasterFilePath)
         {
-            filePath = userInputFilePath;
+            masterFilePath = userInputMasterFilePath;
         }
+
+        /// <summary>
+        /// SETter for cashierAndEvent file file path
+        /// </summary>
+        /// <param name="userInputCashierAndEventFilePath">file path to cashierAndEvent file</param>
+        public static void setCashierAndEventFilePath(string userInputCashierAndEventFilePath)
+        {
+            cashierAndEventFilePath = userInputCashierAndEventFilePath;
+        }
+        
 
         /// <summary>
         /// SETter for customer TIN

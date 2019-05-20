@@ -33,27 +33,18 @@ namespace FONZY
             openFileDialog.Filter = "Excel Worksheets|*.xls; *.xlsx";
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                GlobalUtilities.setFilePath(openFileDialog.FileName);
+                GlobalUtilities.setMasterFilePath(openFileDialog.FileName);
             }
 
             // Stores excel data onto Dictionary
-            // addCustomerOrder(string userInputOrderBarCode, string userInputOrderProductDescription, string userInputOrderPrice, string userInputOrderQuantity, string userInputOrderDiscount, string userInputOrderAmount)
-            Excel.Application xlApp;
-            Excel.Workbook xlWorkbook;
-            Excel.Worksheet xlWorksheet;
-            Excel.Range xlRange;
+            Excel.Application xlApp = new Excel.Application();
+            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(GlobalUtilities.getMasterFilePath(), 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+            Excel.Worksheet xlWorksheet = (Excel.Worksheet)xlWorkbook.Worksheets.get_Item(1);
+            Excel.Range xlRange = xlWorksheet.UsedRange;
 
-            int row = 0;
-            int col = 0;
+            int row = xlRange.Rows.Count;
+            int col = xlRange.Columns.Count;
             string eanCodePlaceholder = "";
-
-            xlApp = new Excel.Application();
-            xlWorkbook = xlApp.Workbooks.Open(GlobalUtilities.getFilePath(), 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
-            xlWorksheet = (Excel.Worksheet)xlWorkbook.Worksheets.get_Item(1);
-
-            xlRange = xlWorksheet.UsedRange;
-            row = xlRange.Rows.Count;
-            col = xlRange.Columns.Count;
 
             for(int rowCount = 1; rowCount <= row; rowCount++)
             {
