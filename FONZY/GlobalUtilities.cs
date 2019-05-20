@@ -28,8 +28,8 @@ namespace FONZY
         private static string customerType;
 
         // Customer order data
-        private static Dictionary<string, List<string>> masterListDictionary;
-        private static Dictionary<string, List<string>> customerTransactionDictionary;
+        private static Dictionary<string, List<string>> masterListDictionary = new Dictionary<string, List<string>>();
+        private static Dictionary<string, List<string>> customerTransactionDictionary = new Dictionary<string, List<string>>();
         private static bool cashPaymentIdentifier;
         private static bool creditPaymentIdentifier;
         private static bool debitPaymentIdentifier;
@@ -47,22 +47,6 @@ namespace FONZY
         private static string filePath;
 
         //----- Public functions -----//
-        GlobalUtilities()
-        {
-            // master list and customer order list
-            masterListDictionary = new Dictionary<string, List<string>>();
-            customerTransactionDictionary = new Dictionary<string, List<string>>();
-
-            // Payment Constructor
-            cashPayment = 0f;
-            creditPayment = 0f;
-            debitPayment = 0f;
-            checkPayment = 0f;
-            salaryDeductionPayment = 0f;
-            totalCost = 0f;
-            totalChange = 0f;
-        }
-
         //--- GETters ---//
         public static string getCashierName() { return cashierName; }
 
@@ -330,6 +314,7 @@ namespace FONZY
         /// <param name="userInputList"></param>
         public static void addToDictionary(string dictionaryType, string userInputBarCode, List<string> userInputList)
         {
+            //Console.WriteLine("ADD TO DICTIONARY FUNCTION");
             // If there are no known Keys (userInputBarCode) in the dictionary, add a Key,Value pair
             // else update the Key,Value pair
             if (dictionaryType == MASTER)
@@ -343,7 +328,8 @@ namespace FONZY
                     masterListDictionary[userInputBarCode] = userInputList;
                 }
             }
-            else if(dictionaryType == CUSTOMER){
+            else if(dictionaryType == CUSTOMER)
+            {
                 if (!customerTransactionDictionary.ContainsKey(userInputBarCode))
                 {
                     customerTransactionDictionary.Add(userInputBarCode, userInputList);

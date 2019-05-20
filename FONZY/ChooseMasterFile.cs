@@ -89,10 +89,7 @@ namespace FONZY
                     }
                 }
                 GlobalUtilities.addToDictionary(GlobalUtilities.MASTER, eanCodePlaceholder, productListInfo);
-                Console.WriteLine(GlobalUtilities.getMasterListDictionary());
-
             }
-
 
             this.Close();
             CashierAndEventInfo cashierAndEventInfo = new CashierAndEventInfo();
