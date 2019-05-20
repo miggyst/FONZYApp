@@ -9,6 +9,10 @@ namespace FONZY
     public class GlobalUtilities
     {
         //----- Variables to take note of -----//
+        //Generic Constant String Variables
+        public const string MASTER = "master";
+        public const string CUSTOMER = "customer";
+
         // Cashier information
         private static string cashierName;
         private static string eventName;
@@ -24,7 +28,8 @@ namespace FONZY
         private static string customerType;
 
         // Customer order data
-        private static Dictionary<string, List<string>> customerTransactionDictionary = new Dictionary<string, List<string>>();
+        private static Dictionary<string, List<string>> masterListDictionary;
+        private static Dictionary<string, List<string>> customerTransactionDictionary;
         private static bool cashPaymentIdentifier;
         private static bool creditPaymentIdentifier;
         private static bool debitPaymentIdentifier;
@@ -44,7 +49,10 @@ namespace FONZY
         //----- Public functions -----//
         GlobalUtilities()
         {
-            // MIGHT NEED TO DELETE THIS CONSTRUCTOR!!
+            // master list and customer order list
+            masterListDictionary = new Dictionary<string, List<string>>();
+            customerTransactionDictionary = new Dictionary<string, List<string>>();
+
             // Payment Constructor
             cashPayment = 0f;
             creditPayment = 0f;
@@ -77,6 +85,10 @@ namespace FONZY
         public static string getCustomerOSCA() { return customerOSCA; }
 
         public static string getCustomerType() { return customerType; }
+
+        public static Dictionary<string, List<string>> getMasterListDictionary() { return masterListDictionary; }
+
+        public static Dictionary<string, List<string>> getCustomerTransactionDictionary() { return customerTransactionDictionary; }
 
         public static bool getCashPaymentIdentifier() { return cashPaymentIdentifier; }
 
@@ -310,19 +322,37 @@ namespace FONZY
         }
 
         /// <summary>
-        /// adds an order to the dictionary if the order isn't within the dictionary beforehand
+        /// adds an order to the dictionary if the order isn't within the dictionary beforehand,
+        /// if there is already a value in the dictionary, it updates the dictionary accordingly
         /// </summary>
-        /// <param name="userInputOrderBarCode">product bar code</param>
-        /// <param name="userInputOrderProductDescription">product description</param>
-        /// <param name="userInputOrderPrice">product price</param>
-        /// <param name="userInputOrderQuantity">product quantity</param>
-        /// <param name="userInputOrderDiscount">product discount</param>
-        /// <param name="userInputOrderAmount">product total amount</param>
-        public static void addCustomerOrder(string userInputOrderBarCode, string userInputOrderProductDescription, string userInputOrderPrice, string userInputOrderQuantity, string userInputOrderDiscount, string userInputOrderAmount)
+        /// <param name="dictionaryType"></param>
+        /// <param name="userInputBarCode"></param>
+        /// <param name="userInputList"></param>
+        public static void addToDictionary(string dictionaryType, string userInputBarCode, List<string> userInputList)
         {
-            // need to check for duplicate lists in dictionary
-            List<string> dictionaryList = new List<string> { userInputOrderProductDescription, userInputOrderPrice, userInputOrderQuantity, userInputOrderDiscount, userInputOrderAmount };
-            customerTransactionDictionary.Add(userInputOrderBarCode, dictionaryList);
+            // If there are no known Keys (userInputBarCode) in the dictionary, add a Key,Value pair
+            // else update the Key,Value pair
+            if (dictionaryType == MASTER)
+            {
+                if (masterListDictionary == null || !masterListDictionary.ContainsKey(userInputBarCode))
+                {
+                    masterListDictionary.Add(userInputBarCode, userInputList);
+                }
+                else
+                {
+                    masterListDictionary[userInputBarCode] = userInputList;
+                }
+            }
+            else if(dictionaryType == CUSTOMER){
+                if (!customerTransactionDictionary.ContainsKey(userInputBarCode))
+                {
+                    customerTransactionDictionary.Add(userInputBarCode, userInputList);
+                }
+                else
+                {
+                    customerTransactionDictionary[userInputBarCode] = userInputList;
+                }
+            }
         }
 
         /// <summary>
