@@ -69,11 +69,11 @@ namespace FONZY
                     }
                     else // Material #, Material Description, Selling Price, Discount, and Quantity
                     {
-                        if (obj == null)
+                        if (colCount == 6)
                         {
-                            productListInfo.Add("0");
+                            productListInfo.Add("1");
                         }
-                        else
+                        else if (obj != null)
                         {
                             productListInfo.Add(obj.ToString());
                         }

@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.addProduct = new System.Windows.Forms.Button();
+            this.addProductButton = new System.Windows.Forms.Button();
             this.nameLabel = new System.Windows.Forms.Label();
             this.phoneLabel = new System.Windows.Forms.Label();
             this.addressLabel = new System.Windows.Forms.Label();
@@ -43,7 +43,7 @@
             this.totalQuantityTextBox = new System.Windows.Forms.TextBox();
             this.totalCostTextBox = new System.Windows.Forms.TextBox();
             this.productBarCodeTextBox = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.productOrderDataGridView = new System.Windows.Forms.DataGridView();
             this.quantityNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.barCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,18 +51,19 @@
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productOrderDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.quantityNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
-            // addProduct
+            // addProductButton
             // 
-            this.addProduct.Location = new System.Drawing.Point(551, 596);
-            this.addProduct.Name = "addProduct";
-            this.addProduct.Size = new System.Drawing.Size(110, 23);
-            this.addProduct.TabIndex = 0;
-            this.addProduct.Text = "Add";
-            this.addProduct.UseVisualStyleBackColor = true;
+            this.addProductButton.Location = new System.Drawing.Point(551, 596);
+            this.addProductButton.Name = "addProductButton";
+            this.addProductButton.Size = new System.Drawing.Size(110, 23);
+            this.addProductButton.TabIndex = 0;
+            this.addProductButton.Text = "Add";
+            this.addProductButton.UseVisualStyleBackColor = true;
+            this.addProductButton.Click += new System.EventHandler(this.AddProductButton_Click);
             // 
             // nameLabel
             // 
@@ -181,20 +182,20 @@
             this.productBarCodeTextBox.Size = new System.Drawing.Size(263, 20);
             this.productBarCodeTextBox.TabIndex = 15;
             // 
-            // dataGridView1
+            // productOrderDataGridView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.productOrderDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.productOrderDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.barCode,
             this.productDescription,
             this.price,
             this.quantity,
             this.discount,
             this.amount});
-            this.dataGridView1.Location = new System.Drawing.Point(23, 65);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(638, 495);
-            this.dataGridView1.TabIndex = 16;
+            this.productOrderDataGridView.Location = new System.Drawing.Point(23, 65);
+            this.productOrderDataGridView.Name = "productOrderDataGridView";
+            this.productOrderDataGridView.Size = new System.Drawing.Size(638, 495);
+            this.productOrderDataGridView.TabIndex = 16;
             // 
             // quantityNumericUpDown
             // 
@@ -213,6 +214,7 @@
             this.barCode.HeaderText = "Bar Code";
             this.barCode.Name = "barCode";
             this.barCode.ReadOnly = true;
+            this.barCode.Width = 95;
             // 
             // productDescription
             // 
@@ -254,7 +256,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 661);
             this.Controls.Add(this.quantityNumericUpDown);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.productOrderDataGridView);
             this.Controls.Add(this.productBarCodeTextBox);
             this.Controls.Add(this.totalCostTextBox);
             this.Controls.Add(this.totalQuantityTextBox);
@@ -269,11 +271,11 @@
             this.Controls.Add(this.addressLabel);
             this.Controls.Add(this.phoneLabel);
             this.Controls.Add(this.nameLabel);
-            this.Controls.Add(this.addProduct);
+            this.Controls.Add(this.addProductButton);
             this.Name = "SaleDetails";
             this.Text = "Sale Details";
             this.Load += new System.EventHandler(this.SaleDetails_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productOrderDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.quantityNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -282,7 +284,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button addProduct;
+        private System.Windows.Forms.Button addProductButton;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.Label phoneLabel;
         private System.Windows.Forms.Label addressLabel;
@@ -297,7 +299,7 @@
         private System.Windows.Forms.TextBox totalQuantityTextBox;
         private System.Windows.Forms.TextBox totalCostTextBox;
         private System.Windows.Forms.TextBox productBarCodeTextBox;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView productOrderDataGridView;
         private System.Windows.Forms.NumericUpDown quantityNumericUpDown;
         private System.Windows.Forms.DataGridViewTextBoxColumn barCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn productDescription;

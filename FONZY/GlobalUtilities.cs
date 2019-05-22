@@ -101,223 +101,128 @@ namespace FONZY
 
         public static float getTotalChange() { return totalChange; }
 
-
-        /// <summary>
-        /// SETter for cashier name
-        /// </summary>
-        /// <param name="userInputCashierName">cashier name</param>
+        //----- SETters -----//
         public static void setCashierName(string userInputCashierName)
         {
             cashierName = userInputCashierName;
         }
 
-        /// <summary>
-        /// SETter for event name
-        /// </summary>
-        /// <param name="userInputEventName">event name</param>
         public static void setEventName(string userInputEventName)
         {
             eventName = userInputEventName;
         }
 
-        /// <summary>
-        /// SETter for customer name
-        /// </summary>
-        /// <param name="userInputCustomerName">customer name</param>
         public static void setCustomerName(string userInputCustomerName)
         {
             customerName = userInputCustomerName;
         }
 
-        /// <summary>
-        /// SETter for customer address
-        /// </summary>
-        /// <param name="userInputCustomerAddress">customer address</param>
         public static void setCustomerAddress(string userInputCustomerAddress)
         {
             customerAddress = userInputCustomerAddress;
         }
 
-        /// <summary>
-        /// SETter for customer contact number
-        /// </summary>
-        /// <param name="userInputCustomerContact">contact number</param>
         public static void setCustomerContact(string userInputCustomerContact)
         {
             customerContact = userInputCustomerContact;
         }
 
-        /// <summary>
-        /// SETter for masterfile file path
-        /// </summary>
-        /// <param name="userInputMasterFilePath">file path to masterfile</param>
         public static void setMasterFilePath(string userInputMasterFilePath)
         {
             masterFilePath = userInputMasterFilePath;
         }
 
-        /// <summary>
-        /// SETter for cashierAndEvent file file path
-        /// </summary>
-        /// <param name="userInputCashierAndEventFilePath">file path to cashierAndEvent file</param>
         public static void setCashierAndEventFilePath(string userInputCashierAndEventFilePath)
         {
             cashierAndEventFilePath = userInputCashierAndEventFilePath;
         }
         
-
-        /// <summary>
-        /// SETter for customer TIN
-        /// </summary>
-        /// <param name="userInputCustomerTIN">customer TIN</param>
         public static void setCustomerTIN(string userInputCustomerTIN)
         {
             customerTIN = userInputCustomerTIN;
         }
 
-        /// <summary>
-        /// SETter for customer business style
-        /// </summary>
-        /// <param name="userInputCustomerBusinessStyle">customer business style</param>
         public static void setCustomerBusinessStyle(string userInputCustomerBusinessStyle)
         {
             customerBusinessStyle = userInputCustomerBusinessStyle;
         }
 
-        /// <summary>
-        /// SETter for customer terms
-        /// </summary>
-        /// <param name="userInputCustomerTerms">customer terms</param>
         public static void setCustomerTerms(string userInputCustomerTerms)
         {
             customerTerms = userInputCustomerTerms;
         }
 
-        /// <summary>
-        /// SETter for customer OSCA/PWD ID Number
-        /// </summary>
-        /// <param name="userInputCustomerOSCA">customer OSCA/PWD ID Number</param>
         public static void setCustomerOSCA(string userInputCustomerOSCA)
         {
             customerOSCA = userInputCustomerOSCA;
         }
 
-        /// <summary>
-        /// SETter for customer type
-        /// </summary>
-        /// <param name="userInputCustomerType">customer type</param>
         public static void setCustomerType(string userInputCustomerType)
         {
             customerType = userInputCustomerType;
         }
 
-        /// <summary>
-        /// SETter for cash payment identifier
-        /// </summary>
-        /// <param name="userInputCashPaymentIdentifier">cash payment identifier</param>
         public static void setCashPaymentIdentifier(bool userInputCashPaymentIdentifier)
         {
             cashPaymentIdentifier = userInputCashPaymentIdentifier;
         }
 
-        /// <summary>
-        /// SETter for credit payment identifier
-        /// </summary>
-        /// <param name="userInputCreditPaymentIdentifier">credit payment identifier</param>
         public static void setCreditPaymentIdentifier(bool userInputCreditPaymentIdentifier)
         {
             creditPaymentIdentifier = userInputCreditPaymentIdentifier;
         }
 
-        /// <summary>
-        /// SETter for debit payment identifier
-        /// </summary>
-        /// <param name="userInputDebitPaymentIdentifier">debit payment identifier</param>
         public static void setDebitPaymentIdentifier(bool userInputDebitPaymentIdentifier)
         {
             debitPaymentIdentifier = userInputDebitPaymentIdentifier;
         }
 
-        /// <summary>
-        /// SETter for check payment identifier
-        /// </summary>
-        /// <param name="userInputCheckPaymentIdentifier">check payment identifier</param>
         public static void setCheckPaymentIdentifier(bool userInputCheckPaymentIdentifier)
         {
             checkPaymentIdentifier = userInputCheckPaymentIdentifier;
         }
 
-        /// <summary>
-        /// SETter for salary deduction payment identifier
-        /// </summary>
-        /// <param name="userInputSalaryDeductionPaymentIdentifier">salary deduction payment identifier</param>
         public static void setSalaryDeductionPaymentIdentifier(bool userInputSalaryDeductionPaymentIdentifier)
         {
             salaryDeductionPaymentIdentifier = userInputSalaryDeductionPaymentIdentifier;
         }
 
-        /// <summary>
-        /// SETter for cash payment
-        /// </summary>
-        /// <param name="userInputCashPayment">cash payment</param>
         public static void setCashPayment(float userInputCashPayment)
         {
             cashPayment = userInputCashPayment;
         }
 
-        /// <summary>
-        /// SETter for credit payment
-        /// </summary>
-        /// <param name="userInputCreditPayment">credit payment</param>
         public static void setCreditPayment(float userInputCreditPayment)
         {
             creditPayment = userInputCreditPayment;
         }
 
-        /// <summary>
-        /// SETter for debit payment
-        /// </summary>
-        /// <param name="userInputDebitPayment">debit payment</param>
         public static void setDebitPayment(float userInputDebitPayment)
         {
             debitPayment = userInputDebitPayment;
         }
 
-        /// <summary>
-        /// SETter for check payment
-        /// </summary>
-        /// <param name="userInputCheckPayment">check payment</param>
         public static void setCheckPayment(float userInputCheckPayment)
         {
             checkPayment = userInputCheckPayment;
         }
 
-        /// <summary>
-        /// SETter for salary deduction payment
-        /// </summary>
-        /// <param name="userInputSalaryDeductionPayment">salary deduction payment</param>
         public static void setSalaryDeductionPayment(float userInputSalaryDeductionPayment)
         {
             salaryDeductionPayment = userInputSalaryDeductionPayment;
         }
 
-        /// <summary>
-        /// SETter for total cost
-        /// </summary>
-        /// <param name="userInputTotalCost">total cost</param>
         public static void setTotalCost(float userInputTotalCost)
         {
             totalCost = userInputTotalCost;
         }
 
-        /// <summary>
-        /// SETter for total change
-        /// </summary>
         public static void setTotalChange()
         {
             totalChange = totalCost - (cashPayment + creditPayment + debitPayment + checkPayment + salaryDeductionPayment);
         }
 
+        //----- Other Methods -----//
         /// <summary>
         /// adds an order to the dictionary if the order isn't within the dictionary beforehand,
         /// if there is already a value in the dictionary, it updates the dictionary accordingly
@@ -327,7 +232,6 @@ namespace FONZY
         /// <param name="userInputList"></param>
         public static void addToDictionary(string dictionaryType, string userInputBarCode, List<string> userInputList)
         {
-            //Console.WriteLine("ADD TO DICTIONARY FUNCTION");
             // If there are no known Keys (userInputBarCode) in the dictionary, add a Key,Value pair
             // else update the Key,Value pair
             if (dictionaryType == MASTER)
@@ -355,6 +259,44 @@ namespace FONZY
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userInputBarCode"></param>
+        /// <returns></returns>
+        public static List<string> getProductInfoFromDictionary(string dictionaryType, string userInputBarCode)
+        {
+            /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+             *                                   List index legend:                                      *
+             *      0    |          1           |     2     |       3       |       4       |      5     *
+             * ------------------------------------------------------------------------------------------*
+             *  Bar Code |  Product Description |   Price   |   Quantity    |   Discount    |   Amount   *
+             * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+            List<string> productInformationList = new List<string>();
+            if (dictionaryType == MASTER)
+            {
+                if (masterListDictionary.ContainsKey(userInputBarCode))
+                {
+                    productInformationList.Add(userInputBarCode);   // Bar Code
+                    productInformationList.Add(masterListDictionary[userInputBarCode][1]);  // Product Description
+                    productInformationList.Add(masterListDictionary[userInputBarCode][2]);  // Price
+                    productInformationList.Add(masterListDictionary[userInputBarCode][4]);  // Quantity
+                    productInformationList.Add(masterListDictionary[userInputBarCode][3]);  // Discount
+                    productInformationList.Add(calculatePrice(masterListDictionary[userInputBarCode][2], masterListDictionary[userInputBarCode][4], masterListDictionary[userInputBarCode][3]));    // Amount
+                }
+            }
+            else if(dictionaryType == CUSTOMER)
+            {
+                // Needs updating
+                if (customerTransactionDictionary.ContainsKey(userInputBarCode))
+                {
+                    productInformationList.Add(userInputBarCode);
+                }
+            }
+            return productInformationList;
+        }
+
+        /// <summary>
         /// resets the payment identifiers to default
         /// </summary>
         public static void resetPaymentIdentifiers()
@@ -364,6 +306,32 @@ namespace FONZY
             setDebitPaymentIdentifier(false);
             setCheckPaymentIdentifier(false);
             setSalaryDeductionPaymentIdentifier(false);
+        }
+
+        /// <summary>
+        /// Calculates the total price of a product order given the objects passed into the method
+        /// </summary>
+        /// <param name="userInputPrice">price of the product</param>
+        /// <param name="userInputQuantity">number of the given product</param>
+        /// <param name="userInputDiscount">product discount</param>
+        /// <returns></returns>
+        public static string calculatePrice(string userInputPrice, string userInputQuantity, string userInputDiscount)
+        {
+            if(!String.IsNullOrEmpty(userInputPrice) && !String.IsNullOrEmpty(userInputQuantity) && !String.IsNullOrEmpty(userInputDiscount))
+            {
+                return (((Double.Parse(userInputPrice)) * (Double.Parse(userInputQuantity))) * (Double.Parse(userInputDiscount))).ToString();
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Checks the customerTransactionDictionary if an order of the same barcode has been placed before
+        /// </summary>
+        /// <param name="userInputBarCode"></param>
+        /// <returns></returns>
+        public static bool isInCustomerTransactionDictionary(string userInputBarCode)
+        {
+            return customerTransactionDictionary.ContainsKey(userInputBarCode);
         }
     }
 }
