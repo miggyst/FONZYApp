@@ -28,6 +28,7 @@ namespace FONZY
             ChooseApplication chooseApplication = new ChooseApplication();
             chooseApplication.ShowDialog();
             nameTextBox.Focus();
+            processButton.Enabled = false;
 
         }
 
@@ -63,8 +64,6 @@ namespace FONZY
                 updateDataGridViewRow.Cells[3].Value = (Double.Parse(updateDataGridViewRow.Cells[3].Value.ToString()) + (double)quantityNumericUpDown.Value).ToString();
                 updateDataGridViewRow.Cells[5].Value = GlobalUtilities.calculatePrice(updateDataGridViewRow.Cells[2].Value.ToString(), updateDataGridViewRow.Cells[3].Value.ToString(), updateDataGridViewRow.Cells[4].Value.ToString());
 
-                Console.WriteLine(updateDataGridViewRow.Cells[5].Value);
-
                 customerProductOrder.Add(updateDataGridViewRow.Cells[1].Value.ToString());
                 customerProductOrder.Add(updateDataGridViewRow.Cells[2].Value.ToString());
                 customerProductOrder.Add(updateDataGridViewRow.Cells[3].Value.ToString());
@@ -85,7 +84,12 @@ namespace FONZY
             }
 
             // NEED TO UPDATE TOTAL QUANTITY AND TOTAL AMOUNT HERE!
+            GlobalUtilities.setTotalQuantity((Int32.Parse(GlobalUtilities.getTotalQuantity()) + Int32.Parse(customerProductOrder[2])).ToString());
+            GlobalUtilities.setTotalCost(GlobalUtilities.getTotalCost() + Double.Parse(GlobalUtilities.calculatePrice(customerProductOrder[2], customerProductOrder[2], customerProductOrder[4])));
             updateSaleDetailsForm();
+
+            totalQuantityTextBox.Text = GlobalUtilities.getTotalQuantity();
+            totalCostTextBox.Text = (GlobalUtilities.getTotalCost()).ToString();
             addProductButton.Focus();
         }
 
@@ -112,6 +116,93 @@ namespace FONZY
         private void updateSaleDetailsForm()
         {
 
+        }
+
+        /// <summary>
+        /// Checks if nameTextBox, phoneTextBox, addressTextBox, and productOrderDataGridView has input,
+        /// if so, enabled the processButton, else disable processButton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (canProcessOrder())
+            {
+                processButton.Enabled = true;
+            }
+            else
+            {
+                processButton.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Checks if nameTextBox, phoneTextBox, addressTextBox, and productOrderDataGridView has input,
+        /// if so, enabled the processButton, else disable processButton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PhoneTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (canProcessOrder())
+            {
+                processButton.Enabled = true;
+            }
+            else
+            {
+                processButton.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Checks if nameTextBox, phoneTextBox, addressTextBox, and productOrderDataGridView has input,
+        /// if so, enabled the processButton, else disable processButton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddressTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (canProcessOrder())
+            {
+                processButton.Enabled = true;
+            }
+            else
+            {
+                processButton.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Checks if nameTextBox, phoneTextBox, addressTextBox, and productOrderDataGridView has input,
+        /// if so, enabled the processButton, else disable processButton
+        /// </summary>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ProductOrderDataGridView_TabIndexChanged(object sender, EventArgs e)
+        {
+            if (canProcessOrder())
+            {
+                processButton.Enabled = true;
+            }
+            else
+            {
+                processButton.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Checks if nameTextBox, phoneTextBox, addressTextBox, and productOrderDataGridView has input,
+        /// if so, return true, else returns false
+        /// </summary>
+        /// <returns></returns>
+        private bool canProcessOrder()
+        {
+            if (!String.IsNullOrWhiteSpace(nameTextBox.Text) && !String.IsNullOrWhiteSpace(phoneTextBox.Text) && !String.IsNullOrWhiteSpace(addressTextBox.Text) && (productOrderDataGridView.Rows.Count > 0))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

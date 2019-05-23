@@ -44,13 +44,13 @@
             this.totalCostTextBox = new System.Windows.Forms.TextBox();
             this.productBarCodeTextBox = new System.Windows.Forms.TextBox();
             this.productOrderDataGridView = new System.Windows.Forms.DataGridView();
-            this.quantityNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.barCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityNumericUpDown = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.productOrderDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.quantityNumericUpDown)).BeginInit();
             this.SuspendLayout();
@@ -144,6 +144,7 @@
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(369, 20);
             this.nameTextBox.TabIndex = 9;
+            this.nameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
             // 
             // phoneTextBox
             // 
@@ -151,6 +152,7 @@
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.Size = new System.Drawing.Size(139, 20);
             this.phoneTextBox.TabIndex = 10;
+            this.phoneTextBox.TextChanged += new System.EventHandler(this.PhoneTextBox_TextChanged);
             // 
             // addressTextBox
             // 
@@ -158,6 +160,7 @@
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.Size = new System.Drawing.Size(577, 20);
             this.addressTextBox.TabIndex = 11;
+            this.addressTextBox.TextChanged += new System.EventHandler(this.AddressTextBox_TextChanged);
             // 
             // totalQuantityTextBox
             // 
@@ -196,18 +199,7 @@
             this.productOrderDataGridView.Name = "productOrderDataGridView";
             this.productOrderDataGridView.Size = new System.Drawing.Size(638, 495);
             this.productOrderDataGridView.TabIndex = 16;
-            // 
-            // quantityNumericUpDown
-            // 
-            this.quantityNumericUpDown.Location = new System.Drawing.Point(466, 599);
-            this.quantityNumericUpDown.Name = "quantityNumericUpDown";
-            this.quantityNumericUpDown.Size = new System.Drawing.Size(50, 20);
-            this.quantityNumericUpDown.TabIndex = 17;
-            this.quantityNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.productOrderDataGridView.TabIndexChanged += new System.EventHandler(this.ProductOrderDataGridView_TabIndexChanged);
             // 
             // barCode
             // 
@@ -249,6 +241,28 @@
             this.amount.HeaderText = "Amount";
             this.amount.Name = "amount";
             this.amount.ReadOnly = true;
+            // 
+            // quantityNumericUpDown
+            // 
+            this.quantityNumericUpDown.Location = new System.Drawing.Point(466, 599);
+            this.quantityNumericUpDown.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
+            this.quantityNumericUpDown.Minimum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            -2147483648});
+            this.quantityNumericUpDown.Name = "quantityNumericUpDown";
+            this.quantityNumericUpDown.Size = new System.Drawing.Size(50, 20);
+            this.quantityNumericUpDown.TabIndex = 17;
+            this.quantityNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // SaleDetails
             // 
