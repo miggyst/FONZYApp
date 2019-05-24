@@ -84,6 +84,7 @@
             this.Controls.Add(this.printerLabel);
             this.Name = "PrinterDetails";
             this.Text = "Printer";
+            this.Load += new System.EventHandler(this.PrinterDetails_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
