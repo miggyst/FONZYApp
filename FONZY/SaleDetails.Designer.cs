@@ -199,7 +199,6 @@
             this.productOrderDataGridView.Name = "productOrderDataGridView";
             this.productOrderDataGridView.Size = new System.Drawing.Size(638, 495);
             this.productOrderDataGridView.TabIndex = 16;
-            this.productOrderDataGridView.TabIndexChanged += new System.EventHandler(this.ProductOrderDataGridView_TabIndexChanged);
             // 
             // barCode
             // 

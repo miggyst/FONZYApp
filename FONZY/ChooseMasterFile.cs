@@ -71,7 +71,7 @@ namespace FONZY
                     {
                         if (colCount == 6)
                         {
-                            productListInfo.Add("1");
+                            productListInfo.Add("0");
                         }
                         else if (obj != null)
                         {

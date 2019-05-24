@@ -58,10 +58,33 @@ namespace FONZY
 
             // Check customerTransactionDictionary. if available find the list and update, else search masterListDictionary and add it into customerTransactionDictionary
             // then update the DataGridView as necessary
-            if (GlobalUtilities.isInCustomerTransactionDictionary(productBarCodeTextBox.Text))
+            if (GlobalUtilities.isInDictionary(GlobalUtilities.CUSTOMER, productBarCodeTextBox.Text))
             {
                 DataGridViewRow updateDataGridViewRow = productOrderDataGridView.Rows[rowSearchWithMatchingBarCodes(productBarCodeTextBox.Text)];
-                updateDataGridViewRow.Cells[3].Value = (Double.Parse(updateDataGridViewRow.Cells[3].Value.ToString()) + (double)quantityNumericUpDown.Value).ToString();
+                int totalQuantityCheck = Int32.Parse(updateDataGridViewRow.Cells[3].Value.ToString()) + (int)quantityNumericUpDown.Value;
+
+                if (totalQuantityCheck <= 0)
+                {
+                    productOrderDataGridView.Rows.RemoveAt(rowSearchWithMatchingBarCodes(productBarCodeTextBox.Text));
+
+                    GlobalUtilities.setTotalQuantity((Int32.Parse(GlobalUtilities.getTotalQuantity()) - Int32.Parse(updateDataGridViewRow.Cells[3].Value.ToString())).ToString());
+                    GlobalUtilities.setTotalCost(GlobalUtilities.getTotalCost() - Double.Parse(GlobalUtilities.calculatePrice(updateDataGridViewRow.Cells[2].Value.ToString(), updateDataGridViewRow.Cells[3].Value.ToString(), updateDataGridViewRow.Cells[4].Value.ToString())));
+
+                    (GlobalUtilities.getCustomerTransactionDictionary()).Remove(productBarCodeTextBox.Text);
+
+                    totalQuantityTextBox.Text = GlobalUtilities.getTotalQuantity();
+                    totalCostTextBox.Text = (GlobalUtilities.getTotalCost()).ToString();
+                    productBarCodeTextBox.Focus();
+
+                    productBarCodeTextBox.Text = "";
+
+                    return ;
+                }
+
+                GlobalUtilities.setTotalQuantity((Int32.Parse(GlobalUtilities.getTotalQuantity()) + Int32.Parse(quantityNumericUpDown.Value.ToString())).ToString());
+                GlobalUtilities.setTotalCost(GlobalUtilities.getTotalCost() + Double.Parse(GlobalUtilities.calculatePrice(updateDataGridViewRow.Cells[2].Value.ToString(), quantityNumericUpDown.Value.ToString(), updateDataGridViewRow.Cells[4].Value.ToString())));
+
+                updateDataGridViewRow.Cells[3].Value = totalQuantityCheck;
                 updateDataGridViewRow.Cells[5].Value = GlobalUtilities.calculatePrice(updateDataGridViewRow.Cells[2].Value.ToString(), updateDataGridViewRow.Cells[3].Value.ToString(), updateDataGridViewRow.Cells[4].Value.ToString());
 
                 customerProductOrder.Add(updateDataGridViewRow.Cells[1].Value.ToString());
@@ -73,24 +96,40 @@ namespace FONZY
             }
             else
             {
-                customerProductOrder = GlobalUtilities.getProductInfoFromDictionary(GlobalUtilities.MASTER, productBarCodeTextBox.Text);
-                customerProductOrder[3] = (Double.Parse(customerProductOrder[3]) + (double)quantityNumericUpDown.Value).ToString();
+                if ((int)quantityNumericUpDown.Value <= 0 || String.IsNullOrWhiteSpace(productBarCodeTextBox.Text) || !GlobalUtilities.isInDictionary(GlobalUtilities.MASTER, (productBarCodeTextBox.Text).TrimStart(new Char[] { '0' })))
+                {
+                    return;
+                }
+                customerProductOrder = GlobalUtilities.getProductInfoFromDictionary(GlobalUtilities.MASTER, (productBarCodeTextBox.Text).TrimStart(new Char[] { '0' }));
+                customerProductOrder[3] = (Int32.Parse(customerProductOrder[3]) + (int)quantityNumericUpDown.Value).ToString();
+                customerProductOrder[5] = GlobalUtilities.calculatePrice(customerProductOrder[2], customerProductOrder[3], customerProductOrder[4]);
 
                 //                                    Bar Code              Product Description             Price                 Quantity                  Discount                  Amount 
-                productOrderDataGridView.Rows.Add(customerProductOrder[0], customerProductOrder[1], customerProductOrder[2], customerProductOrder[3], customerProductOrder[4], customerProductOrder[5]);
+                productOrderDataGridView.Rows.Add(productBarCodeTextBox.Text, customerProductOrder[1], customerProductOrder[2], customerProductOrder[3], customerProductOrder[4], customerProductOrder[5]);
 
                 customerProductOrder.RemoveAt(0);
                 GlobalUtilities.addToDictionary(GlobalUtilities.CUSTOMER, productBarCodeTextBox.Text, customerProductOrder);
-            }
 
-            // NEED TO UPDATE TOTAL QUANTITY AND TOTAL AMOUNT HERE!
-            GlobalUtilities.setTotalQuantity((Int32.Parse(GlobalUtilities.getTotalQuantity()) + Int32.Parse(customerProductOrder[2])).ToString());
-            GlobalUtilities.setTotalCost(GlobalUtilities.getTotalCost() + Double.Parse(GlobalUtilities.calculatePrice(customerProductOrder[2], customerProductOrder[2], customerProductOrder[4])));
-            updateSaleDetailsForm();
+                GlobalUtilities.setTotalQuantity((Int32.Parse(GlobalUtilities.getTotalQuantity()) + Int32.Parse(customerProductOrder[2])).ToString());
+                GlobalUtilities.setTotalCost(GlobalUtilities.getTotalCost() + Double.Parse(GlobalUtilities.calculatePrice(customerProductOrder[1], customerProductOrder[2], customerProductOrder[3])));
+            }
 
             totalQuantityTextBox.Text = GlobalUtilities.getTotalQuantity();
             totalCostTextBox.Text = (GlobalUtilities.getTotalCost()).ToString();
-            addProductButton.Focus();
+
+            productBarCodeTextBox.Text = "";
+            quantityNumericUpDown.Value = 1;
+
+            if (canProcessOrder())
+            {
+                processButton.Enabled = true;
+            }
+            else
+            {
+                processButton.Enabled = false;
+            }
+
+            productBarCodeTextBox.Focus();
         }
 
         /// <summary>
@@ -107,15 +146,6 @@ namespace FONZY
                 }
             }
             return 0;
-        }
-
-        /// <summary>
-        /// Updates the GlobalUtilities Name, Phone, Address, Total Price, Total Quantity
-        /// and also updates the UI to showcase the saved data/changes in the DataGridView
-        /// </summary>
-        private void updateSaleDetailsForm()
-        {
-
         }
 
         /// <summary>
@@ -174,31 +204,12 @@ namespace FONZY
 
         /// <summary>
         /// Checks if nameTextBox, phoneTextBox, addressTextBox, and productOrderDataGridView has input,
-        /// if so, enabled the processButton, else disable processButton
-        /// </summary>
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ProductOrderDataGridView_TabIndexChanged(object sender, EventArgs e)
-        {
-            if (canProcessOrder())
-            {
-                processButton.Enabled = true;
-            }
-            else
-            {
-                processButton.Enabled = false;
-            }
-        }
-
-        /// <summary>
-        /// Checks if nameTextBox, phoneTextBox, addressTextBox, and productOrderDataGridView has input,
         /// if so, return true, else returns false
         /// </summary>
         /// <returns></returns>
         private bool canProcessOrder()
         {
-            if (!String.IsNullOrWhiteSpace(nameTextBox.Text) && !String.IsNullOrWhiteSpace(phoneTextBox.Text) && !String.IsNullOrWhiteSpace(addressTextBox.Text) && (productOrderDataGridView.Rows.Count > 0))
+            if (!String.IsNullOrWhiteSpace(nameTextBox.Text) && !String.IsNullOrWhiteSpace(phoneTextBox.Text) && !String.IsNullOrWhiteSpace(addressTextBox.Text) && (productOrderDataGridView.Rows.Count > 1))
             {
                 return true;
             }

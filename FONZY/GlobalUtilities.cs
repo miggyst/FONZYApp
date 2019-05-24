@@ -327,7 +327,14 @@ namespace FONZY
         {
             if(!String.IsNullOrEmpty(userInputPrice) && !String.IsNullOrEmpty(userInputQuantity) && !String.IsNullOrEmpty(userInputDiscount))
             {
-                return (((Double.Parse(userInputPrice)) * (Double.Parse(userInputQuantity))) * (Double.Parse(userInputDiscount))).ToString();
+                if(userInputDiscount == "0")
+                {
+                    return (((Double.Parse(userInputPrice)) * (Double.Parse(userInputQuantity)))).ToString();
+                }
+                else
+                {
+                    return (((Double.Parse(userInputPrice)) * (Double.Parse(userInputQuantity))) * (Double.Parse(userInputDiscount))).ToString();
+                }
             }
             return null;
         }
@@ -337,9 +344,17 @@ namespace FONZY
         /// </summary>
         /// <param name="userInputBarCode"></param>
         /// <returns></returns>
-        public static bool isInCustomerTransactionDictionary(string userInputBarCode)
+        public static bool isInDictionary(string dictionaryType, string userInputBarCode)
         {
-            return customerTransactionDictionary.ContainsKey(userInputBarCode);
+            if (dictionaryType == "master")
+            {
+                return masterListDictionary.ContainsKey(userInputBarCode);
+            }
+            else if (dictionaryType == "customer")
+            {
+                return customerTransactionDictionary.ContainsKey(userInputBarCode);
+            }
+            return false;
         }
     }
 }
