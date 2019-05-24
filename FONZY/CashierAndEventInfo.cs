@@ -76,7 +76,7 @@ namespace FONZY
             // Creates the filepath for the cashier+event excel file
             string filePath = (GlobalUtilities.getMasterFilePath()).Remove((GlobalUtilities.getMasterFilePath()).LastIndexOf('\\') + 1);
             string[] dateTimeArray = (DateTime.UtcNow.Date.ToString("dd/MM/yyyy")).Split('/');
-            GlobalUtilities.setCashierAndEventFilePath(filePath + cashierNameTextBox.Text + "_" + eventNameTextBox.Text + "_" + dateTimeArray[0] + "-" + dateTimeArray[1]);
+            GlobalUtilities.setCashierAndEventFilePath(filePath + cashierNameTextBox.Text + "_" + eventNameTextBox.Text + "_" + dateTimeArray[0] + "-" + dateTimeArray[1] + ".xlsx");
 
             // Checks if the file already exists, if so update, if not create a new file
             if (!System.IO.File.Exists(GlobalUtilities.getCashierAndEventFilePath())) // Create a new file
@@ -108,9 +108,9 @@ namespace FONZY
                 Marshal.ReleaseComObject(xlWorkbook);
                 Marshal.ReleaseComObject(xlApp);
             }
-            else // Update the file
+            else
             {
-                // Maybe set the file row/column in the globalutilities???
+                // Do nothing
             }
 
             this.Close();
