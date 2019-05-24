@@ -36,7 +36,7 @@ namespace FONZY
         private void OpenButton_Click(object sender, EventArgs e)
         {
             // need to fix file name to not be a hard coded string
-            string filename = "C:\\Users\\hedce\\Desktop\\POSTestRunner\\Corrected Clorox Price List Nov26'18.xlsx";
+            string filename = "C:\\Users\\hedce\\Desktop\\POSTestRunner\\masterFile.xlsx";
             System.Diagnostics.Process.Start(filename);
         }
 

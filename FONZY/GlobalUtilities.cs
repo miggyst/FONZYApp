@@ -35,13 +35,13 @@ namespace FONZY
         private static bool debitPaymentIdentifier;
         private static bool checkPaymentIdentifier;
         private static bool salaryDeductionPaymentIdentifier;
-        private static double cashPayment = 0;
-        private static double creditPayment = 0;
-        private static double debitPayment = 0;
-        private static double checkPayment = 0;
-        private static double salaryDeductionPayment = 0;
+        private static string cashPayment = "0";
+        private static string creditPayment = "0";
+        private static string debitPayment = "0";
+        private static string checkPayment = "0";
+        private static string salaryDeductionPayment = "0";
         private static double totalCost = 0;
-        private static double totalChange = 0;
+        private static string totalChange = "0";
         private static string totalQuantity = "0";
 
         // Folder FilePath for saved data
@@ -88,19 +88,19 @@ namespace FONZY
 
         public static bool getSalaryDeductionPaymentIdentifier() { return salaryDeductionPaymentIdentifier; }
 
-        public static double getCashPayment() { return cashPayment; }
+        public static string getCashPayment() { return cashPayment; }
 
-        public static double getCreditPayment() { return creditPayment; }
+        public static string getCreditPayment() { return creditPayment; }
 
-        public static double getDebitPayment() { return debitPayment; }
+        public static string getDebitPayment() { return debitPayment; }
 
-        public static double getCheckPayment() { return checkPayment; }
+        public static string getCheckPayment() { return checkPayment; }
 
-        public static double getSalaryDeductionPayment() { return salaryDeductionPayment; }
+        public static string getSalaryDeductionPayment() { return salaryDeductionPayment; }
 
         public static double getTotalCost() { return totalCost; }
 
-        public static double getTotalChange() { return totalChange; }
+        public static string getTotalChange() { return totalChange; }
 
         public static string getTotalQuantity() { return totalQuantity; }
 
@@ -190,27 +190,27 @@ namespace FONZY
             salaryDeductionPaymentIdentifier = userInputSalaryDeductionPaymentIdentifier;
         }
 
-        public static void setCashPayment(double userInputCashPayment)
+        public static void setCashPayment(string userInputCashPayment)
         {
             cashPayment = userInputCashPayment;
         }
 
-        public static void setCreditPayment(double userInputCreditPayment)
+        public static void setCreditPayment(string userInputCreditPayment)
         {
             creditPayment = userInputCreditPayment;
         }
 
-        public static void setDebitPayment(double userInputDebitPayment)
+        public static void setDebitPayment(string userInputDebitPayment)
         {
             debitPayment = userInputDebitPayment;
         }
 
-        public static void setCheckPayment(double userInputCheckPayment)
+        public static void setCheckPayment(string userInputCheckPayment)
         {
             checkPayment = userInputCheckPayment;
         }
 
-        public static void setSalaryDeductionPayment(double userInputSalaryDeductionPayment)
+        public static void setSalaryDeductionPayment(string userInputSalaryDeductionPayment)
         {
             salaryDeductionPayment = userInputSalaryDeductionPayment;
         }
@@ -227,7 +227,7 @@ namespace FONZY
 
         public static void setTotalChange()
         {
-            totalChange = totalCost - (cashPayment + creditPayment + debitPayment + checkPayment + salaryDeductionPayment);
+            totalChange = (-1 * (totalCost - (Double.Parse(cashPayment) + Double.Parse(creditPayment) + Double.Parse(debitPayment) + Double.Parse(checkPayment) + Double.Parse(salaryDeductionPayment)))).ToString();
         }
 
         //----- Other Methods -----//

@@ -52,6 +52,9 @@ namespace FONZY
             {
                 salaryDeductionTextBox.ReadOnly = true;
             }
+
+            totalAmountTextBox.Text = String.Format("{0:n}", GlobalUtilities.getTotalCost());
+            changeTextBox.Text = "0";
         }
 
         /// <summary>
@@ -247,9 +250,25 @@ namespace FONZY
         /// <param name="e"></param>
         private void CalculateButton_Click(object sender, EventArgs e)
         {
-            // need to add checks for change before proceeding
-            // code for now
-            proceedButton.Enabled = true;
+            GlobalUtilities.setCashPayment(cashTextBox.Text);
+            GlobalUtilities.setCreditPayment(creditTextBox.Text);
+            GlobalUtilities.setDebitPayment(debitTextBox.Text);
+            GlobalUtilities.setCheckPayment(checkTextBox.Text);
+            GlobalUtilities.setSalaryDeductionPayment(salaryDeductionTextBox.Text);
+            GlobalUtilities.setTotalChange();
+
+            changeTextBox.Text = String.Format("{0:n}", GlobalUtilities.getTotalChange());
+            totalCustomerPaymentTextBox.Text = String.Format("{0:n}", (Double.Parse(GlobalUtilities.getCashPayment()) + Double.Parse(GlobalUtilities.getCreditPayment()) + Double.Parse(GlobalUtilities.getDebitPayment())
+                                                + Double.Parse(GlobalUtilities.getCheckPayment()) + Double.Parse(GlobalUtilities.getSalaryDeductionPayment())).ToString());
+
+            if (Double.Parse(GlobalUtilities.getTotalChange()) >= 0)
+            {
+                proceedButton.Enabled = true;
+            }
+            else
+            {
+                proceedButton.Enabled = false;
+            }
         }
     }
 }
