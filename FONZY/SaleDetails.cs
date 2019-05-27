@@ -40,7 +40,9 @@ namespace FONZY
         /// <param name="e"></param>
         private void ProcessButton_Click(object sender, EventArgs e)
         {
-            //NEED TO DISABLE PROCESS BUTTON WHEN THERE ISN'T ANY DATA INSIDE DataGridView
+            GlobalUtilities.setCustomerName(nameTextBox.Text);
+            GlobalUtilities.setCustomerAddress(addressTextBox.Text);
+            GlobalUtilities.setCustomerContact(phoneTextBox.Text);
             CodeDetails codeDetails = new CodeDetails();
             codeDetails.ShowDialog();
         }

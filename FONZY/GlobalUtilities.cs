@@ -47,6 +47,7 @@ namespace FONZY
         // Folder FilePath for saved data
         private static string masterFilePath;
         private static string cashierAndEventFilePath;
+        private static string customerOrderFilePath;
 
         //----- Public functions -----//
         //--- GETters ---//
@@ -63,6 +64,8 @@ namespace FONZY
         public static string getMasterFilePath() { return masterFilePath; }
 
         public static string getCashierAndEventFilePath() { return cashierAndEventFilePath; }
+
+        public static string getCustomerOrderFilePath() { return customerOrderFilePath; }
 
         public static string getCustomerTIN() { return customerTIN; }
 
@@ -139,7 +142,13 @@ namespace FONZY
         {
             cashierAndEventFilePath = userInputCashierAndEventFilePath;
         }
-        
+
+        public static void setCustomerOrderFilePath(string userInputCustomerOrderFilePath)
+        {
+            customerOrderFilePath = userInputCustomerOrderFilePath;
+        }
+
+
         public static void setCustomerTIN(string userInputCustomerTIN)
         {
             customerTIN = userInputCustomerTIN;
