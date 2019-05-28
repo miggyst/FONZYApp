@@ -304,10 +304,13 @@ namespace FONZY
             }
             else if(dictionaryType == CUSTOMER)
             {
-                // Needs updating
                 if (customerTransactionDictionary.ContainsKey(userInputBarCode))
                 {
-                    productInformationList.Add(userInputBarCode);
+                    productInformationList.Add(userInputBarCode);   // Bar Code
+                    productInformationList.Add(customerTransactionDictionary[userInputBarCode][0]); // Product Description
+                    productInformationList.Add(customerTransactionDictionary[userInputBarCode][1]); // Price
+                    productInformationList.Add(customerTransactionDictionary[userInputBarCode][2]); // Quantity
+                    productInformationList.Add(customerTransactionDictionary[userInputBarCode][4]); // Amount
                 }
             }
             return productInformationList;
@@ -342,7 +345,7 @@ namespace FONZY
                 }
                 else
                 {
-                    return (((Double.Parse(userInputPrice)) * (Double.Parse(userInputQuantity))) * (Double.Parse(userInputDiscount))).ToString();
+                    return (((Double.Parse(userInputPrice)) * (Double.Parse(userInputQuantity))) * (1 - Double.Parse(userInputDiscount))).ToString();
                 }
             }
             return null;

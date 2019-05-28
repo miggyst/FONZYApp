@@ -106,7 +106,7 @@ namespace FONZY
                 customerProductOrder[3] = (Int32.Parse(customerProductOrder[3]) + (int)quantityNumericUpDown.Value).ToString();
                 customerProductOrder[5] = GlobalUtilities.calculatePrice(customerProductOrder[2], customerProductOrder[3], customerProductOrder[4]);
 
-                //                                    Bar Code              Product Description             Price                 Quantity                  Discount                  Amount 
+                //                                        Bar Code              Product Description             Price                 Quantity                  Discount                  Amount 
                 productOrderDataGridView.Rows.Add(productBarCodeTextBox.Text, customerProductOrder[1], customerProductOrder[2], customerProductOrder[3], customerProductOrder[4], customerProductOrder[5]);
 
                 customerProductOrder.RemoveAt(0);

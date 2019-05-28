@@ -56,8 +56,7 @@ namespace FONZY
         /// <param name="e"></param>
         private void OpenButton_Click(object sender, EventArgs e)
         {
-            // need to fix file name to not be a hard coded string
-            System.Diagnostics.Process.Start(GlobalUtilities.getCashierAndEventFilePath());
+            System.Diagnostics.Process.Start(GlobalUtilities.getCustomerOrderFilePath());
         }
 
         /// <summary>
@@ -120,34 +119,52 @@ namespace FONZY
                 para.Range.Text = Environment.NewLine;
 
                 // Cashier, Time and Customer Number info
-                para.Range.Text = "Cashier: " + GlobalUtilities.getCashierName();
-                para.Range.InsertParagraphAfter();
-                para.Range.Text = "Time: " + GlobalUtilities.getCashierName();
-                para.Range.InsertParagraphAfter();
-                para.Range.Text = "Cust. Tel.: " + GlobalUtilities.getCashierName();
-                para.Range.InsertParagraphAfter();
+                para.Range.Text = "Cashier: " + GlobalUtilities.getCashierName() + Environment.NewLine;
+                para.Range.Text = "Time: " + GlobalUtilities.getCashierName() + Environment.NewLine;
+                para.Range.Text = "Cust. Tel.: " + GlobalUtilities.getCashierName() + Environment.NewLine;
 
                 // Some indentation to align text
                 para.Range.Text = Environment.NewLine;
 
                 // Customer details: Customer Name, address, TIN, Business Style, Data, Terms, OSCA/PWD ID No., Cardholder's Signature
-                para.Range.Text = buildCharacterParagraphArray(10, GlobalUtilities.getCustomerName(), 38, 7, DateTime.UtcNow.Date.ToString("dd/MM/yyyy"));
-                para.Range.InsertParagraphAfter();
-                para.Range.Text = buildCharacterParagraphArray(10, GlobalUtilities.getCustomerAddress(), 38, 8, GlobalUtilities.getCustomerTerms());
-                para.Range.InsertParagraphAfter();
-                para.Range.Text = buildCharacterParagraphArray(7, GlobalUtilities.getCustomerTIN(), 41, 18, GlobalUtilities.getCustomerOSCA());
-                para.Range.InsertParagraphAfter();
-                para.Range.Text = buildCharacterParagraphArray(15, GlobalUtilities.getCustomerBusinessStyle(), 33, 20, "");
-                para.Range.InsertParagraphAfter();
+                para.Range.Text = buildCharacterParagraphArray(10, GlobalUtilities.getCustomerName(), 38, 7, DateTime.UtcNow.Date.ToString("dd/MM/yyyy")) + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(10, GlobalUtilities.getCustomerAddress(), 38, 8, GlobalUtilities.getCustomerTerms()) + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(7, GlobalUtilities.getCustomerTIN(), 41, 18, GlobalUtilities.getCustomerOSCA()) + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(15, GlobalUtilities.getCustomerBusinessStyle(), 33, 20, "") + Environment.NewLine;
+
+                // Customer order details title
+                para.Range.Text = Environment.NewLine;
+                para.Range.Text = "Item Number        Description                        Qty   Price   Amount" + Environment.NewLine;
+                para.Range.Text = Environment.NewLine;
 
                 // Customer order details breakdown
+                List<string> keyList = new List<string>(GlobalUtilities.getCustomerTransactionDictionary().Keys);
+                for (int i = 0; i < GlobalUtilities.getCustomerTransactionDictionary().Count; i++)
+                {
+                    para.Range.Text = buildBodyParagraphArray(keyList[i]) + Environment.NewLine;
+                }
+                for (int j = 0; j < (20 - GlobalUtilities.getCustomerTransactionDictionary().Count); j++)
+                {
+                    para.Range.Text = Environment.NewLine;
+                }
                 para.Range.Text = Environment.NewLine;
-                para.Range.Text = "INSERT CUSTOMER ORDER DETAILS HERE!";
-                para.Range.InsertParagraphAfter();
+                para.Range.Text = buildTotalParagraphArray() + Environment.NewLine;
 
+                // Sales data
+                para.Range.Text = Environment.NewLine;
+                para.Range.Text = Environment.NewLine;
+                para.Range.Text = "VATable Sales" + Environment.NewLine;
+                para.Range.Text = Environment.NewLine;
+                para.Range.Text = Environment.NewLine;
+                para.Range.Text = "Total Sales" + Environment.NewLine;
+                para.Range.Text = "Add. Vat" + Environment.NewLine;
+                para.Range.Text = "Total Amt" + Environment.NewLine;
+                para.Range.Text = Environment.NewLine;
+                para.Range.Text = "Amount Paid" + Environment.NewLine;
+                para.Range.Text = "Change" + Environment.NewLine;
 
                 //Save the document  
-                object documentFilePath = GlobalUtilities.getCustomerOrderFilePath();//@"C:\Users\hedce\Desktop\POSTestRunner\testFile.docx";
+                object documentFilePath = GlobalUtilities.getCustomerOrderFilePath();
                 wordDocument.SaveAs2(ref documentFilePath);
                 wordDocument.Close(ref missing, ref missing, ref missing);
                 wordDocument = null;
@@ -215,6 +232,144 @@ namespace FONZY
                             }
                         }
                     }
+                }
+            }
+            return string.Join("", paraList);
+        }
+
+        /// <summary>
+        /// Builds the body that can host up to 20 customer orders.
+        /// Displays Item number, Description, Quantity, Price, and Amount
+        /// </summary>
+        /// <param name="customerKey"></param>
+        /// <returns></returns>
+        private string buildBodyParagraphArray(string customerKey)
+        {
+            List<string> paraList = new List<string>();
+            List<string> customerOrder = GlobalUtilities.getProductInfoFromDictionary(GlobalUtilities.CUSTOMER, customerKey);
+
+            char[] barCodeCharArray = customerKey.ToCharArray();
+            char[] productDescriptionCharArray = customerOrder[1].ToCharArray();
+            char[] priceCharArray = customerOrder[2].ToCharArray();
+            char[] quantityCharArray = customerOrder[3].ToCharArray();
+            char[] amountCharArray = customerOrder[4].ToCharArray();
+
+            // Item Number
+            for (int i = 0; i < 16; i++)
+            {
+                if (i < customerKey.Length)
+                {
+                    paraList.Add(barCodeCharArray[i].ToString());
+                }
+                else
+                {
+                    paraList.Add(" ");
+                }
+            }
+            for (int numSpace = 0; numSpace < 3; numSpace++)
+            {
+                paraList.Add(" ");
+            }
+
+            // Description
+            for (int j = 0; j < 32; j ++)
+            {
+                if (j < customerOrder[1].Length)
+                {
+                    paraList.Add(productDescriptionCharArray[j].ToString());
+                }
+                else
+                {
+                    paraList.Add(" ");
+                }
+            }
+            for (int numSpace = 0; numSpace < 3; numSpace++)
+            {
+                paraList.Add(" ");
+            }
+
+            // Quantity
+            for (int k = 0; k < 3; k++)
+            {
+                if (k < customerOrder[3].Length)
+                {
+                    paraList.Add(quantityCharArray[k].ToString());
+                }
+                else
+                {
+                    paraList.Add(" ");
+                }
+            }
+            for (int numSpace = 0; numSpace < 3; numSpace++)
+            {
+                paraList.Add(" ");
+            }
+
+            // Price
+            for (int l = 0; l < 5; l++)
+            {
+                if (l < customerOrder[2].Length)
+                {
+                    paraList.Add(priceCharArray[l].ToString());
+                }
+                else
+                {
+                    paraList.Add(" ");
+                }
+            }
+            for (int numSpace = 0; numSpace < 3; numSpace++)
+            {
+                paraList.Add(" ");
+            }
+
+            // Amount
+            for (int m = 0; m < 9; m++)
+            {
+                if (m < customerOrder[4].Length)
+                {
+                    paraList.Add(amountCharArray[m].ToString());
+                }
+                else
+                {
+                    paraList.Add(" ");
+                }
+            }
+
+            return string.Join("", paraList);
+        }
+
+        /// <summary>
+        /// Builds the total paragraph to display total quantity and amount
+        /// </summary>
+        /// <returns></returns>
+        private string buildTotalParagraphArray()
+        {
+            List<string> paraList = new List<string>();
+            paraList.Add("                                              Total  ");
+            char[] totalQuantity = GlobalUtilities.getTotalQuantity().ToCharArray();
+            char[] totalCost = GlobalUtilities.getTotalCost().ToString().ToCharArray();
+
+            for (int i = 0; i < 15; i++)
+            {
+                if (i < GlobalUtilities.getTotalQuantity().Length)
+                {
+                    paraList.Add(totalQuantity[i].ToString());
+                }
+                else
+                {
+                    paraList.Add(" ");
+                }
+            }
+
+            for (int j = 0; j < 9; j++)
+            {
+                if (j < GlobalUtilities.getTotalCost().ToString().Length)
+                {
+                    paraList.Add(totalCost[j].ToString());
+                }
+                else
+                {
+                    paraList.Add(" ");
                 }
             }
             return string.Join("", paraList);
