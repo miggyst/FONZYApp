@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Word;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -66,11 +67,15 @@ namespace FONZY
         /// <param name="e"></param>
         private void PrintButton_Click(object sender, EventArgs e)
         {
+            /*
             PrintDialog printDialog = new PrintDialog();
             PrintDocument printDocument = new PrintDocument();
 
-            // Need to find a way to create then print the created document
-            printDocument.DocumentName = "Print Document";
+            Word.Application wordApp = new Word.Application();
+            wordApp.Visible = false;
+            Document document = wordApp.Documents.Open(GlobalUtilities.getCustomerOrderFilePath);
+
+            //printDocument.DocumentName = "Print Document";
 
             printDialog.Document = printDocument;
 
@@ -81,6 +86,41 @@ namespace FONZY
             {
                 printDocument.Print();
             }
+            */
+            /*
+            Word.Application wordApp = new Word.Application();
+            wordApp.Visible = false;
+            object missing = System.Reflection.Missing.Value;
+            object file = GlobalUtilities.getCustomerOrderFilePath();
+            Document document = wordApp.Documents.Add(ref file);
+            document.Activate();
+            int dialogResult = wordApp.Dialogs[Microsoft.Office.Interop.Word.WdWordDialog.wdDialogFilePrint].Show(ref missing);
+
+            if (dialogResult == 1)
+            {
+                document.PrintOut();
+            }
+
+            document.Close(SaveChanges: false);
+            ((Word._Application)wordApp).Quit(SaveChanges: false);
+            wordApp = null;
+            */
+
+            Word.Application wordApp = new Word.Application();
+            wordApp.Visible = false;
+            object file = GlobalUtilities.getCustomerOrderFilePath();
+
+            PrintDialog pDialog = new PrintDialog();
+            if (pDialog.ShowDialog() == DialogResult.OK)
+            {
+                Word.Document doc = wordApp.Documents.Add(ref file);
+                wordApp.ActivePrinter = pDialog.PrinterSettings.PrinterName;
+                wordApp.ActiveDocument.PrintOut();
+                doc.Close(SaveChanges: false);
+                doc = null;
+            }
+            ((Word._Application)wordApp).Quit(SaveChanges: false);
+            // https://www.e-iceblue.com/Tutorials/Spire.Doc/Spire.Doc-Program-Guide/Print-a-Word-Document-Programmatically-in-5-Steps.html
         }
 
         /// <summary>
@@ -151,17 +191,19 @@ namespace FONZY
                 para.Range.Text = buildTotalParagraphArray() + Environment.NewLine;
 
                 // Sales data
+                double vatSales = GlobalUtilities.getTotalCost() * 0.88;
+                double vat = GlobalUtilities.getTotalCost() * 0.12;
                 para.Range.Text = Environment.NewLine;
                 para.Range.Text = Environment.NewLine;
-                para.Range.Text = "VATable Sales" + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(68, "", 0, 0, vatSales.ToString()) + Environment.NewLine;
                 para.Range.Text = Environment.NewLine;
                 para.Range.Text = Environment.NewLine;
-                para.Range.Text = "Total Sales" + Environment.NewLine;
-                para.Range.Text = "Add. Vat" + Environment.NewLine;
-                para.Range.Text = "Total Amt" + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(68, "", 0, 0, GlobalUtilities.getTotalCost().ToString()) + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(68, "", 0, 0, vat.ToString()) + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(68, "", 0, 0, GlobalUtilities.getTotalCost().ToString()) + Environment.NewLine;
                 para.Range.Text = Environment.NewLine;
-                para.Range.Text = "Amount Paid" + Environment.NewLine;
-                para.Range.Text = "Change" + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(62, "", 0, 0, GlobalUtilities.getTotalCustomerPayment().ToString()) + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(62, "", 0, 0, GlobalUtilities.getTotalChange()) + Environment.NewLine;   // Change String.Format("{0:n}", GlobalUtilities.getTotalChange())
 
                 //Save the document  
                 object documentFilePath = GlobalUtilities.getCustomerOrderFilePath();

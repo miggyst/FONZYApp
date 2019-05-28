@@ -255,6 +255,7 @@ namespace FONZY
             GlobalUtilities.setDebitPayment(debitTextBox.Text);
             GlobalUtilities.setCheckPayment(checkTextBox.Text);
             GlobalUtilities.setSalaryDeductionPayment(salaryDeductionTextBox.Text);
+            GlobalUtilities.setTotalCustomerPayment();
             GlobalUtilities.setTotalChange();
 
             changeTextBox.Text = String.Format("{0:n}", GlobalUtilities.getTotalChange());

@@ -41,6 +41,7 @@ namespace FONZY
         private static string checkPayment = "0";
         private static string salaryDeductionPayment = "0";
         private static double totalCost = 0;
+        private static double totalCustomerPayment = 0;
         private static string totalChange = "0";
         private static string totalQuantity = "0";
 
@@ -102,6 +103,8 @@ namespace FONZY
         public static string getSalaryDeductionPayment() { return salaryDeductionPayment; }
 
         public static double getTotalCost() { return totalCost; }
+
+        public static double getTotalCustomerPayment() { return totalCustomerPayment; }
 
         public static string getTotalChange() { return totalChange; }
 
@@ -232,6 +235,11 @@ namespace FONZY
         public static void setTotalQuantity(string userInputTotalQuantity)
         {
             totalQuantity = userInputTotalQuantity;
+        }
+
+        public static void setTotalCustomerPayment()
+        {
+            totalCustomerPayment = Double.Parse(cashPayment) + Double.Parse(creditPayment) + Double.Parse(debitPayment) + Double.Parse(checkPayment) + Double.Parse(salaryDeductionPayment);
         }
 
         public static void setTotalChange()
