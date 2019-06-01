@@ -53,6 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalUtilities.cs" />
+    <Compile Include="InventorySaleDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InventorySaleDetails.Designer.cs">
+      <DependentUpon>InventorySaleDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="PaymentCalculator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,9 @@
     <Compile Include="SaleDetails.Designer.cs">
       <DependentUpon>SaleDetails.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="InventorySaleDetails.resx">
+      <DependentUpon>InventorySaleDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PaymentCalculator.resx">
       <DependentUpon>PaymentCalculator.cs</DependentUpon>
     </EmbeddedResource>
