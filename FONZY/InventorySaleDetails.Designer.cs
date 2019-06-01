@@ -29,18 +29,17 @@
         private void InitializeComponent()
         {
             this.productOrderDataGridView = new System.Windows.Forms.DataGridView();
-            this.barCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantityNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.productBarCodeTextBox = new System.Windows.Forms.TextBox();
             this.processButton = new System.Windows.Forms.Button();
             this.quantityLabel = new System.Windows.Forms.Label();
             this.productBarCodeLabel = new System.Windows.Forms.Label();
             this.addProductButton = new System.Windows.Forms.Button();
+            this.barCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.productOrderDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.quantityNumericUpDown)).BeginInit();
             this.SuspendLayout();
@@ -53,53 +52,11 @@
             this.productDescription,
             this.price,
             this.quantity,
-            this.discount,
-            this.amount});
+            this.discount});
             this.productOrderDataGridView.Location = new System.Drawing.Point(22, 12);
             this.productOrderDataGridView.Name = "productOrderDataGridView";
             this.productOrderDataGridView.Size = new System.Drawing.Size(638, 578);
             this.productOrderDataGridView.TabIndex = 17;
-            // 
-            // barCode
-            // 
-            this.barCode.HeaderText = "Bar Code";
-            this.barCode.Name = "barCode";
-            this.barCode.ReadOnly = true;
-            this.barCode.Width = 95;
-            // 
-            // productDescription
-            // 
-            this.productDescription.HeaderText = "Product Description";
-            this.productDescription.Name = "productDescription";
-            this.productDescription.ReadOnly = true;
-            this.productDescription.Width = 200;
-            // 
-            // price
-            // 
-            this.price.HeaderText = "Price";
-            this.price.Name = "price";
-            this.price.ReadOnly = true;
-            this.price.Width = 80;
-            // 
-            // quantity
-            // 
-            this.quantity.HeaderText = "Quantity";
-            this.quantity.Name = "quantity";
-            this.quantity.ReadOnly = true;
-            this.quantity.Width = 60;
-            // 
-            // discount
-            // 
-            this.discount.HeaderText = "Discount";
-            this.discount.Name = "discount";
-            this.discount.ReadOnly = true;
-            this.discount.Width = 60;
-            // 
-            // amount
-            // 
-            this.amount.HeaderText = "Amount";
-            this.amount.Name = "amount";
-            this.amount.ReadOnly = true;
             // 
             // quantityNumericUpDown
             // 
@@ -168,6 +125,40 @@
             this.addProductButton.UseVisualStyleBackColor = true;
             this.addProductButton.Click += new System.EventHandler(this.AddProductButton_Click);
             // 
+            // barCode
+            // 
+            this.barCode.HeaderText = "Bar Code";
+            this.barCode.Name = "barCode";
+            this.barCode.ReadOnly = true;
+            // 
+            // productDescription
+            // 
+            this.productDescription.HeaderText = "Product Description";
+            this.productDescription.Name = "productDescription";
+            this.productDescription.ReadOnly = true;
+            this.productDescription.Width = 295;
+            // 
+            // price
+            // 
+            this.price.HeaderText = "Price";
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
+            this.price.Width = 70;
+            // 
+            // quantity
+            // 
+            this.quantity.HeaderText = "Quantity";
+            this.quantity.Name = "quantity";
+            this.quantity.ReadOnly = true;
+            this.quantity.Width = 60;
+            // 
+            // discount
+            // 
+            this.discount.HeaderText = "Discount";
+            this.discount.Name = "discount";
+            this.discount.ReadOnly = true;
+            this.discount.Width = 50;
+            // 
             // InventorySaleDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -193,17 +184,16 @@
         #endregion
 
         private System.Windows.Forms.DataGridView productOrderDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn barCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productDescription;
-        private System.Windows.Forms.DataGridViewTextBoxColumn price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn discount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         private System.Windows.Forms.NumericUpDown quantityNumericUpDown;
         private System.Windows.Forms.TextBox productBarCodeTextBox;
         private System.Windows.Forms.Button processButton;
         private System.Windows.Forms.Label quantityLabel;
         private System.Windows.Forms.Label productBarCodeLabel;
         private System.Windows.Forms.Button addProductButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn barCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productDescription;
+        private System.Windows.Forms.DataGridViewTextBoxColumn price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn discount;
     }
 }
