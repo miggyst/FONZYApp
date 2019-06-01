@@ -236,5 +236,31 @@ namespace FONZY
                 e.Handled = true;
             }
         }
+
+        /// <summary>
+        /// Allows the user to press the 'Enter' key to prompt the Add button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ProductBarCodeTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                addProductButton.PerformClick();
+            }
+        }
+
+        /// <summary>
+        /// Allows the user to press 'Enter' key to prompt the Add button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QuantityNumericUpDown_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                addProductButton.PerformClick();
+            }
+        }
     }
 }

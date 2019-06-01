@@ -35,16 +35,6 @@ namespace FONZY
         }
 
         /// <summary>
-        /// allows the user to exit the form and go back to SaleDetails
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        /// <summary>
         /// allows the user to open up the desired word document to take a closer look
         /// </summary>
         /// <param name="sender"></param>
@@ -413,6 +403,18 @@ namespace FONZY
                 }
             }
             return string.Join("", paraList);
+        }
+
+        /// <summary>
+        /// allows the user to exit the form,
+        /// delete current contents to clear it for the next customer
+        /// and go back to SaleDetails
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ProceedButton_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

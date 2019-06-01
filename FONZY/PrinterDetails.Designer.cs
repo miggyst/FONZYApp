@@ -31,7 +31,7 @@
             this.printerLabel = new System.Windows.Forms.Label();
             this.printButton = new System.Windows.Forms.Button();
             this.openButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
+            this.proceedButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // printerLabel
@@ -63,22 +63,22 @@
             this.openButton.UseVisualStyleBackColor = true;
             this.openButton.Click += new System.EventHandler(this.OpenButton_Click);
             // 
-            // cancelButton
+            // proceedButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(210, 45);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 3;
-            this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            this.proceedButton.Location = new System.Drawing.Point(210, 45);
+            this.proceedButton.Name = "proceedButton";
+            this.proceedButton.Size = new System.Drawing.Size(75, 23);
+            this.proceedButton.TabIndex = 3;
+            this.proceedButton.Text = "Proceed";
+            this.proceedButton.UseVisualStyleBackColor = true;
+            this.proceedButton.Click += new System.EventHandler(this.ProceedButton_Click);
             // 
             // PrinterDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(294, 81);
-            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.proceedButton);
             this.Controls.Add(this.openButton);
             this.Controls.Add(this.printButton);
             this.Controls.Add(this.printerLabel);
@@ -95,6 +95,6 @@
         private System.Windows.Forms.Label printerLabel;
         private System.Windows.Forms.Button printButton;
         private System.Windows.Forms.Button openButton;
-        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Button proceedButton;
     }
 }

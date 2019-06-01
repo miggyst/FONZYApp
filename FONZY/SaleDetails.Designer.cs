@@ -185,6 +185,7 @@
             this.productBarCodeTextBox.Name = "productBarCodeTextBox";
             this.productBarCodeTextBox.Size = new System.Drawing.Size(263, 20);
             this.productBarCodeTextBox.TabIndex = 15;
+            this.productBarCodeTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ProductBarCodeTextBox_KeyDown);
             // 
             // productOrderDataGridView
             // 
@@ -263,6 +264,7 @@
             0,
             0,
             0});
+            this.quantityNumericUpDown.KeyDown += new System.Windows.Forms.KeyEventHandler(this.QuantityNumericUpDown_KeyDown);
             // 
             // SaleDetails
             // 
