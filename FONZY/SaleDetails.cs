@@ -98,9 +98,15 @@ namespace FONZY
             }
             else
             {
+                if (GlobalUtilities.getCustomerTransactionDictionary().Count == 20)
+                {
+                    // Do not add it to the customer transaction list since it can only have a max of 20
+                    productBarCodeTextBox.Text = "";
+                    return ;
+                }
                 if ((int)quantityNumericUpDown.Value <= 0 || String.IsNullOrWhiteSpace(productBarCodeTextBox.Text) || !GlobalUtilities.isInDictionary(GlobalUtilities.MASTER, (productBarCodeTextBox.Text).TrimStart(new Char[] { '0' })))
                 {
-                    return;
+                    return ;
                 }
                 customerProductOrder = GlobalUtilities.getProductInfoFromDictionary(GlobalUtilities.MASTER, (productBarCodeTextBox.Text).TrimStart(new Char[] { '0' }));
                 customerProductOrder[3] = (Int32.Parse(customerProductOrder[3]) + (int)quantityNumericUpDown.Value).ToString();

@@ -61,60 +61,10 @@ namespace FONZY
         /// <param name="e"></param>
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            /*
-            PrintDialog printDialog = new PrintDialog();
-            PrintDocument printDocument = new PrintDocument();
-
-            Word.Application wordApp = new Word.Application();
-            wordApp.Visible = false;
-            Document document = wordApp.Documents.Open(GlobalUtilities.getCustomerOrderFilePath);
-
-            //printDocument.DocumentName = "Print Document";
-
-            printDialog.Document = printDocument;
-
-            printDialog.AllowSelection = true;
-            printDialog.AllowSomePages = true;
-
-            if(printDialog.ShowDialog() == DialogResult.OK)
-            {
-                printDocument.Print();
-            }
-            */
-            /*
-            Word.Application wordApp = new Word.Application();
-            wordApp.Visible = false;
-            object missing = System.Reflection.Missing.Value;
-            object file = GlobalUtilities.getCustomerOrderFilePath();
-            Document document = wordApp.Documents.Add(ref file);
-            document.Activate();
-            int dialogResult = wordApp.Dialogs[Microsoft.Office.Interop.Word.WdWordDialog.wdDialogFilePrint].Show(ref missing);
-
-            if (dialogResult == 1)
-            {
-                document.PrintOut();
-            }
-
-            document.Close(SaveChanges: false);
-            ((Word._Application)wordApp).Quit(SaveChanges: false);
-            wordApp = null;
-            */
-
-            Word.Application wordApp = new Word.Application();
-            wordApp.Visible = false;
-            object file = GlobalUtilities.getCustomerOrderFilePath();
-
-            PrintDialog pDialog = new PrintDialog();
-            if (pDialog.ShowDialog() == DialogResult.OK)
-            {
-                Word.Document doc = wordApp.Documents.Add(ref file);
-                wordApp.ActivePrinter = pDialog.PrinterSettings.PrinterName;
-                wordApp.ActiveDocument.PrintOut();
-                doc.Close(SaveChanges: false);
-                doc = null;
-            }
-            ((Word._Application)wordApp).Quit(SaveChanges: false);
-            // https://www.e-iceblue.com/Tutorials/Spire.Doc/Spire.Doc-Program-Guide/Print-a-Word-Document-Programmatically-in-5-Steps.html
+            Word.Application wordApp = new Word.Application { Visible = false };
+            Word.Document wordDocument = wordApp.Documents.Open(GlobalUtilities.getCustomerOrderFilePath(), ReadOnly: false, Visible: false);
+            wordDocument.Activate();
+            wordDocument.PrintOut();
         }
 
         /// <summary>
