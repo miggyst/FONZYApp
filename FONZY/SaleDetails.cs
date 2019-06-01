@@ -223,5 +223,18 @@ namespace FONZY
             }
             return false;
         }
+
+        /// <summary>
+        /// Only allows numeric values as text box data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PhoneTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

@@ -153,6 +153,7 @@
             this.phoneTextBox.Size = new System.Drawing.Size(139, 20);
             this.phoneTextBox.TabIndex = 10;
             this.phoneTextBox.TextChanged += new System.EventHandler(this.PhoneTextBox_TextChanged);
+            this.phoneTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PhoneTextBox_KeyPress);
             // 
             // addressTextBox
             // 
