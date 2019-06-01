@@ -138,6 +138,7 @@
             this.processButton.TabIndex = 21;
             this.processButton.Text = "PROCESS";
             this.processButton.UseVisualStyleBackColor = true;
+            this.processButton.Click += new System.EventHandler(this.ProcessButton_Click);
             // 
             // quantityLabel
             // 

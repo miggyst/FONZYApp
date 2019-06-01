@@ -14,8 +14,11 @@ namespace FONZY
 {
 	public partial class ChooseMasterFile : Form
 	{
-		public ChooseMasterFile()
+        private string applicationType;
+
+		public ChooseMasterFile(string userInputApplicationType)
 		{
+            applicationType = userInputApplicationType;
 			InitializeComponent();
 		}
 
@@ -83,8 +86,17 @@ namespace FONZY
             }
 
             this.Close();
-            CashierAndEventInfo cashierAndEventInfo = new CashierAndEventInfo();
-            cashierAndEventInfo.ShowDialog();
+            if (applicationType == GlobalUtilities.TRANSACTION_MODE)
+            {
+                CashierAndEventInfo cashierAndEventInfo = new CashierAndEventInfo();
+                cashierAndEventInfo.ShowDialog();
+            }
+            else if (applicationType == GlobalUtilities.INVENTORY_MODE)
+            {
+                InventorySaleDetails inventorySaleDetails = new InventorySaleDetails();
+                inventorySaleDetails.ShowDialog();
+            }
+            
         }
     }
 }

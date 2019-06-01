@@ -27,7 +27,7 @@ namespace FONZY
         private void InventoryButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            ChooseMasterFile chooseMasterFile = new ChooseMasterFile();
+            ChooseMasterFile chooseMasterFile = new ChooseMasterFile(GlobalUtilities.INVENTORY_MODE);
             chooseMasterFile.ShowDialog();
         }
 
@@ -40,7 +40,7 @@ namespace FONZY
         private void TransactionButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            ChooseMasterFile chooseMasterFile = new ChooseMasterFile();
+            ChooseMasterFile chooseMasterFile = new ChooseMasterFile(GlobalUtilities.TRANSACTION_MODE);
             chooseMasterFile.ShowDialog();
         }
     }

@@ -12,6 +12,8 @@ namespace FONZY
         //Generic Constant String Variables
         public const string MASTER = "master";
         public const string CUSTOMER = "customer";
+        public const string INVENTORY_MODE = "inventory";
+        public const string TRANSACTION_MODE = "transaction";
 
         // Cashier information
         private static string cashierName;
