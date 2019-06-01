@@ -77,7 +77,7 @@ namespace FONZY
                     totalQuantityTextBox.Text = GlobalUtilities.getTotalQuantity();
                     totalCostTextBox.Text = (GlobalUtilities.getTotalCost()).ToString();
                     productBarCodeTextBox.Focus();
-
+                    quantityNumericUpDown.Value = 1;
                     productBarCodeTextBox.Text = "";
 
                     return ;

@@ -40,6 +40,8 @@
             this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.totalQuantityLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.productOrderDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.quantityNumericUpDown)).BeginInit();
             this.SuspendLayout();
@@ -55,7 +57,7 @@
             this.discount});
             this.productOrderDataGridView.Location = new System.Drawing.Point(22, 12);
             this.productOrderDataGridView.Name = "productOrderDataGridView";
-            this.productOrderDataGridView.Size = new System.Drawing.Size(638, 578);
+            this.productOrderDataGridView.Size = new System.Drawing.Size(638, 557);
             this.productOrderDataGridView.TabIndex = 17;
             // 
             // quantityNumericUpDown
@@ -159,11 +161,30 @@
             this.discount.ReadOnly = true;
             this.discount.Width = 50;
             // 
+            // totalQuantityTextBox
+            // 
+            this.totalQuantityTextBox.Location = new System.Drawing.Point(560, 569);
+            this.totalQuantityTextBox.Name = "totalQuantityTextBox";
+            this.totalQuantityTextBox.ReadOnly = true;
+            this.totalQuantityTextBox.Size = new System.Drawing.Size(100, 20);
+            this.totalQuantityTextBox.TabIndex = 25;
+            // 
+            // totalQuantityLabel
+            // 
+            this.totalQuantityLabel.AutoSize = true;
+            this.totalQuantityLabel.Location = new System.Drawing.Point(481, 572);
+            this.totalQuantityLabel.Name = "totalQuantityLabel";
+            this.totalQuantityLabel.Size = new System.Drawing.Size(73, 13);
+            this.totalQuantityLabel.TabIndex = 24;
+            this.totalQuantityLabel.Text = "Total Quantity";
+            // 
             // InventorySaleDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 661);
+            this.Controls.Add(this.totalQuantityTextBox);
+            this.Controls.Add(this.totalQuantityLabel);
             this.Controls.Add(this.quantityNumericUpDown);
             this.Controls.Add(this.productBarCodeTextBox);
             this.Controls.Add(this.processButton);
@@ -195,5 +216,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn price;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn discount;
+        private System.Windows.Forms.TextBox totalQuantityTextBox;
+        private System.Windows.Forms.Label totalQuantityLabel;
     }
 }
