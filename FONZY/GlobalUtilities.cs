@@ -376,5 +376,42 @@ namespace FONZY
             }
             return false;
         }
+
+        /// <summary>
+        /// Deletes current customer order
+        /// to ready up for the next customer
+        /// </summary>
+        public static void cleanCustomerOrder()
+        {
+            // Customer Information
+            customerName = String.Empty;
+            customerAddress = String.Empty;
+            customerContact = String.Empty;
+            customerTIN = String.Empty;
+            customerBusinessStyle = String.Empty;
+            customerTerms = String.Empty;
+            customerOSCA = String.Empty;
+            customerType = String.Empty;
+
+            // Customer order data
+            customerTransactionDictionary.Clear();
+            cashPaymentIdentifier = false;
+            creditPaymentIdentifier = false;
+            debitPaymentIdentifier = false;
+            checkPaymentIdentifier = false;
+            salaryDeductionPaymentIdentifier = false;
+            cashPayment = "0";
+            creditPayment = "0";
+            debitPayment = "0";
+            checkPayment = "0";
+            salaryDeductionPayment = "0";
+            totalCost = 0;
+            totalCustomerPayment = 0;
+            totalChange = "0";
+            totalQuantity = "0";
+
+            // Folder FilePath for saved data
+            customerOrderFilePath = String.Empty;
+    }
     }
 }

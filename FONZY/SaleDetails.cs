@@ -262,5 +262,29 @@ namespace FONZY
                 addProductButton.PerformClick();
             }
         }
+
+        /// <summary>
+        /// Clears the SaleDetails controls and deletes current customer information
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NextCustomerButton_Click(object sender, EventArgs e)
+        {
+            GlobalUtilities.cleanCustomerOrder();
+            foreach (Control c in this.Controls)
+            {
+                var textBox = c as TextBox;
+                var dataGridView = c as DataGridView;
+
+                if (textBox != null)
+                {
+                    textBox.Clear();
+                }
+            }
+            productOrderDataGridView.Rows.Clear();
+            productOrderDataGridView.Refresh();
+            processButton.Enabled = false;
+            productBarCodeTextBox.Focus();
+        }
     }
 }

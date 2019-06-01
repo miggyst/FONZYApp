@@ -51,6 +51,7 @@
             this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantityNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.nextCustomerButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.productOrderDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.quantityNumericUpDown)).BeginInit();
             this.SuspendLayout();
@@ -130,9 +131,9 @@
             // 
             // processButton
             // 
-            this.processButton.Location = new System.Drawing.Point(300, 625);
+            this.processButton.Location = new System.Drawing.Point(419, 625);
             this.processButton.Name = "processButton";
-            this.processButton.Size = new System.Drawing.Size(75, 23);
+            this.processButton.Size = new System.Drawing.Size(97, 23);
             this.processButton.TabIndex = 8;
             this.processButton.Text = "PROCESS";
             this.processButton.UseVisualStyleBackColor = true;
@@ -266,11 +267,22 @@
             0});
             this.quantityNumericUpDown.KeyDown += new System.Windows.Forms.KeyEventHandler(this.QuantityNumericUpDown_KeyDown);
             // 
+            // nextCustomerButton
+            // 
+            this.nextCustomerButton.Location = new System.Drawing.Point(23, 626);
+            this.nextCustomerButton.Name = "nextCustomerButton";
+            this.nextCustomerButton.Size = new System.Drawing.Size(176, 23);
+            this.nextCustomerButton.TabIndex = 0;
+            this.nextCustomerButton.Text = "NEXT CUSTOMER";
+            this.nextCustomerButton.UseVisualStyleBackColor = true;
+            this.nextCustomerButton.Click += new System.EventHandler(this.NextCustomerButton_Click);
+            // 
             // SaleDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 661);
+            this.Controls.Add(this.nextCustomerButton);
             this.Controls.Add(this.quantityNumericUpDown);
             this.Controls.Add(this.productOrderDataGridView);
             this.Controls.Add(this.productBarCodeTextBox);
@@ -323,5 +335,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn discount;
         private System.Windows.Forms.DataGridViewTextBoxColumn amount;
+        private System.Windows.Forms.Button nextCustomerButton;
     }
 }
