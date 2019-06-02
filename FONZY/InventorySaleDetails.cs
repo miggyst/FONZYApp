@@ -4,15 +4,22 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace FONZY
 {
     public partial class InventorySaleDetails : Form
     {
+        List<string> keyList = new List<string>(GlobalUtilities.getMasterListDictionary().Keys);
+        private Microsoft.Office.Interop.Excel.Application xlApp = new Excel.Application();
+        private Excel.Workbook xlWorkbook;
+        private Excel.Worksheet xlWorksheet;
+
         public InventorySaleDetails()
         {
             InitializeComponent();
@@ -25,10 +32,6 @@ namespace FONZY
         /// <param name="e"></param>
         private void InventorySaleDetails_Load(object sender, EventArgs e)
         {
-            List<string> keyList = new List<string>(GlobalUtilities.getMasterListDictionary().Keys);
-
-            //GlobalUtilities.setTotalQuantity((Int32.Parse(GlobalUtilities.getTotalQuantity()) + Int32.Parse(quantityNumericUpDown.Value.ToString())).ToString());
-
             for (int i = 0; i < keyList.Count; i++)
             {
                 if (!Regex.IsMatch(keyList[i].Replace(" ", ""), @"^[a-zA-Z]+$"))
@@ -76,10 +79,6 @@ namespace FONZY
             customerProductOrder.Add(masterListDictionaryProduct[3].ToString());
             customerProductOrder.Add(updateDataGridViewRow.Cells[3].Value.ToString());
 
-            foreach(string valString in customerProductOrder)
-            {
-                Console.WriteLine(valString);
-            }
             GlobalUtilities.addToDictionary(GlobalUtilities.MASTER, productBarCodeTextBox.Text, customerProductOrder);
 
             totalQuantityTextBox.Text = GlobalUtilities.getTotalQuantity();
@@ -95,6 +94,76 @@ namespace FONZY
         /// <param name="e"></param>
         private void ProcessButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                // Opens Excel Sheet
+                xlApp = new Excel.Application();
+                xlApp.Visible = false;
+                xlApp.DisplayAlerts = false;
+                xlWorkbook = xlApp.Workbooks.Open(GlobalUtilities.getMasterFilePath(), 0, false, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "", true, false, 0, true, false, false);
+                xlWorksheet = (Excel.Worksheet)xlWorkbook.Worksheets.get_Item(1);
+
+                // Edits Excel Sheet
+                Excel.Range xlRange = xlWorksheet.UsedRange;
+
+                for (int i = 1; i <= xlRange.Rows.Count + 10; i++)
+                {
+                    if (((Microsoft.Office.Interop.Excel.Range)xlWorksheet.Cells[i, 5]).Value != null)
+                    {
+                        object cellValue = ((Microsoft.Office.Interop.Excel.Range)xlWorksheet.Cells[i, 5]).Value;
+                        string cellValueString = cellValue.ToString();
+                        if (GlobalUtilities.getMasterListDictionary().ContainsKey(cellValueString.TrimStart(new Char[] { '0' })) && !Regex.IsMatch(cellValueString.Replace(" ", ""), @"^[a-zA-Z]+$"))
+                        {
+                            List<string> tempMasterListDictionaryProduct = new List<string>(GlobalUtilities.getMasterListDictionary()[cellValueString.TrimStart(new Char[] { '0' })]);
+                            object quantityCellValue = ((Microsoft.Office.Interop.Excel.Range)xlWorksheet.Cells[i, 6]).Value;
+                            string quantityCellValueString;
+                            if (quantityCellValue != null)
+                            {
+                                quantityCellValueString = quantityCellValue.ToString();
+                            }
+                            else
+                            {
+                                quantityCellValueString = "0";
+                            }
+                            if (!string.IsNullOrWhiteSpace(quantityCellValueString))
+                            {
+                                xlWorksheet.Cells[i, 6] = Double.Parse(quantityCellValueString) + Double.Parse(tempMasterListDictionaryProduct[4].ToString());
+                            }
+                            else
+                            {
+                                xlWorksheet.Cells[i, 6] = Double.Parse(tempMasterListDictionaryProduct[4].ToString());
+                            }
+                        }
+                    }
+                }
+
+                // Saves Excel sheet
+                xlWorkbook.SaveAs(GlobalUtilities.getMasterFilePath());
+                xlWorkbook.Close(true, Type.Missing, Type.Missing);
+                xlApp.Quit();
+                if (xlWorkbook != null) { Marshal.ReleaseComObject(xlWorkbook); } //release each workbook like this
+                if (xlWorksheet != null) { Marshal.ReleaseComObject(xlWorksheet); } //release each worksheet like this
+                if (xlApp != null) { Marshal.ReleaseComObject(xlApp); } //release the Excel application
+                xlWorkbook = null; //set each memory reference to null.
+                xlWorksheet = null;
+                xlApp = null;
+                GC.Collect();
+            }
+            catch (Exception ex)
+            {
+                // Saves Excel sheet
+                xlApp.Quit();
+                //release all memory - stop EXCEL.exe from hanging around.
+                if (xlWorkbook != null) { Marshal.ReleaseComObject(xlWorkbook); } //release each workbook like this
+                if (xlWorksheet != null) { Marshal.ReleaseComObject(xlWorksheet); } //release each worksheet like this
+                if (xlApp != null) { Marshal.ReleaseComObject(xlApp); } //release the Excel application
+                xlWorkbook = null; //set each memory reference to null.
+                xlWorksheet = null;
+                xlApp = null;
+                GC.Collect();
+                MessageBox.Show(ex.Message);
+            }
+
             this.Close();
             Application.Exit();
         }
@@ -113,6 +182,32 @@ namespace FONZY
                 }
             }
             return 0;
+        }
+
+        /// <summary>
+        /// Allows the user to press the 'Enter' key to prompt the Add button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ProductBarCodeTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                addProductButton.PerformClick();
+            }
+        }
+
+        /// <summary>
+        /// Allows the user to press the 'Enter' key to prompt the Add button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QuantityNumericUpDown_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                addProductButton.PerformClick();
+            }
         }
     }
 }

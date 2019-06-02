@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.productOrderDataGridView = new System.Windows.Forms.DataGridView();
+            this.barCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantityNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.productBarCodeTextBox = new System.Windows.Forms.TextBox();
             this.processButton = new System.Windows.Forms.Button();
             this.quantityLabel = new System.Windows.Forms.Label();
             this.productBarCodeLabel = new System.Windows.Forms.Label();
             this.addProductButton = new System.Windows.Forms.Button();
-            this.barCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalQuantityTextBox = new System.Windows.Forms.TextBox();
             this.totalQuantityLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.productOrderDataGridView)).BeginInit();
@@ -59,6 +59,40 @@
             this.productOrderDataGridView.Name = "productOrderDataGridView";
             this.productOrderDataGridView.Size = new System.Drawing.Size(638, 557);
             this.productOrderDataGridView.TabIndex = 17;
+            // 
+            // barCode
+            // 
+            this.barCode.HeaderText = "Bar Code";
+            this.barCode.Name = "barCode";
+            this.barCode.ReadOnly = true;
+            // 
+            // productDescription
+            // 
+            this.productDescription.HeaderText = "Product Description";
+            this.productDescription.Name = "productDescription";
+            this.productDescription.ReadOnly = true;
+            this.productDescription.Width = 295;
+            // 
+            // price
+            // 
+            this.price.HeaderText = "Price";
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
+            this.price.Width = 70;
+            // 
+            // quantity
+            // 
+            this.quantity.HeaderText = "Quantity";
+            this.quantity.Name = "quantity";
+            this.quantity.ReadOnly = true;
+            this.quantity.Width = 60;
+            // 
+            // discount
+            // 
+            this.discount.HeaderText = "Discount";
+            this.discount.Name = "discount";
+            this.discount.ReadOnly = true;
+            this.discount.Width = 50;
             // 
             // quantityNumericUpDown
             // 
@@ -81,6 +115,7 @@
             0,
             0,
             0});
+            this.quantityNumericUpDown.KeyDown += new System.Windows.Forms.KeyEventHandler(this.QuantityNumericUpDown_KeyDown);
             // 
             // productBarCodeTextBox
             // 
@@ -88,6 +123,7 @@
             this.productBarCodeTextBox.Name = "productBarCodeTextBox";
             this.productBarCodeTextBox.Size = new System.Drawing.Size(263, 20);
             this.productBarCodeTextBox.TabIndex = 22;
+            this.productBarCodeTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ProductBarCodeTextBox_KeyDown);
             // 
             // processButton
             // 
@@ -126,40 +162,6 @@
             this.addProductButton.Text = "Add";
             this.addProductButton.UseVisualStyleBackColor = true;
             this.addProductButton.Click += new System.EventHandler(this.AddProductButton_Click);
-            // 
-            // barCode
-            // 
-            this.barCode.HeaderText = "Bar Code";
-            this.barCode.Name = "barCode";
-            this.barCode.ReadOnly = true;
-            // 
-            // productDescription
-            // 
-            this.productDescription.HeaderText = "Product Description";
-            this.productDescription.Name = "productDescription";
-            this.productDescription.ReadOnly = true;
-            this.productDescription.Width = 295;
-            // 
-            // price
-            // 
-            this.price.HeaderText = "Price";
-            this.price.Name = "price";
-            this.price.ReadOnly = true;
-            this.price.Width = 70;
-            // 
-            // quantity
-            // 
-            this.quantity.HeaderText = "Quantity";
-            this.quantity.Name = "quantity";
-            this.quantity.ReadOnly = true;
-            this.quantity.Width = 60;
-            // 
-            // discount
-            // 
-            this.discount.HeaderText = "Discount";
-            this.discount.Name = "discount";
-            this.discount.ReadOnly = true;
-            this.discount.Width = 50;
             // 
             // totalQuantityTextBox
             // 
