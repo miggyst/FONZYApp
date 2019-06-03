@@ -124,6 +124,7 @@
             this.productBarCodeTextBox.Size = new System.Drawing.Size(263, 20);
             this.productBarCodeTextBox.TabIndex = 22;
             this.productBarCodeTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ProductBarCodeTextBox_KeyDown);
+            this.productBarCodeTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ProductBarCodeTextBox_KeyPress);
             // 
             // processButton
             // 

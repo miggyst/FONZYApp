@@ -19,6 +19,7 @@ namespace FONZY
         private Microsoft.Office.Interop.Excel.Application xlApp = new Excel.Application();
         private Excel.Workbook xlWorkbook;
         private Excel.Worksheet xlWorksheet;
+        DateTime lastKeyPress = DateTime.Now;
 
         public InventorySaleDetails()
         {
@@ -50,6 +51,14 @@ namespace FONZY
         /// <param name="e"></param>
         private void AddProductButton_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrWhiteSpace(productBarCodeTextBox.Text) || !GlobalUtilities.isInDictionary(GlobalUtilities.MASTER, (productBarCodeTextBox.Text).TrimStart(new Char[] { '0' })))
+            {
+                productBarCodeTextBox.Focus();
+                quantityNumericUpDown.Value = 1;
+                productBarCodeTextBox.Text = "";
+                return;
+            }
+
             List<string> customerProductOrder = new List<string>();
             List<string> masterListDictionaryProduct = new List<string>(GlobalUtilities.getMasterListDictionary()[(productBarCodeTextBox.Text).TrimStart(new Char[] { '0' })]);
             DataGridViewRow updateDataGridViewRow = productOrderDataGridView.Rows[rowSearchWithMatchingBarCodes((productBarCodeTextBox.Text).TrimStart(new Char[] { '0' }))];
@@ -208,6 +217,22 @@ namespace FONZY
             {
                 addProductButton.PerformClick();
             }
+        }
+
+        /// <summary>
+        /// Allows the user to use a physical Scanner for a bar code to automatically edit and add,
+        /// The program auto searches the dictionary for the given bar code, by automatically clicking the add button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ProductBarCodeTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((TimeSpan)(DateTime.Now - lastKeyPress)).TotalMilliseconds < 2000)
+            {
+                addProductButton.PerformClick();
+                productBarCodeTextBox.Text = "";
+            }
+            lastKeyPress = DateTime.Now;
         }
     }
 }
