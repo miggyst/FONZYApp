@@ -54,8 +54,8 @@ namespace FONZY
             if (String.IsNullOrWhiteSpace(productBarCodeTextBox.Text) || !GlobalUtilities.isInDictionary(GlobalUtilities.MASTER, (productBarCodeTextBox.Text).TrimStart(new Char[] { '0' })))
             {
                 productBarCodeTextBox.Focus();
-                quantityNumericUpDown.Value = 1;
-                productBarCodeTextBox.Text = "";
+                //quantityNumericUpDown.Value = 1;
+                //productBarCodeTextBox.Text = "";
                 return;
             }
 
@@ -92,7 +92,7 @@ namespace FONZY
 
             totalQuantityTextBox.Text = GlobalUtilities.getTotalQuantity();
             productBarCodeTextBox.Focus();
-            productBarCodeTextBox.Text = "";
+            productBarCodeTextBox.Text = String.Empty;
             quantityNumericUpDown.Value = 1;
         }
 
@@ -103,6 +103,7 @@ namespace FONZY
         /// <param name="e"></param>
         private void ProcessButton_Click(object sender, EventArgs e)
         {
+            addProductButton.PerformClick();
             try
             {
                 // Opens Excel Sheet
@@ -204,6 +205,11 @@ namespace FONZY
             {
                 addProductButton.PerformClick();
             }
+            if (((TimeSpan)(DateTime.Now - lastKeyPress)).TotalMilliseconds > 20)
+            {
+                addProductButton.PerformClick();
+            }
+            lastKeyPress = DateTime.Now;
         }
 
         /// <summary>
@@ -217,22 +223,6 @@ namespace FONZY
             {
                 addProductButton.PerformClick();
             }
-        }
-
-        /// <summary>
-        /// Allows the user to use a physical Scanner for a bar code to automatically edit and add,
-        /// The program auto searches the dictionary for the given bar code, by automatically clicking the add button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ProductBarCodeTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (((TimeSpan)(DateTime.Now - lastKeyPress)).TotalMilliseconds < 2000)
-            {
-                addProductButton.PerformClick();
-                productBarCodeTextBox.Text = "";
-            }
-            lastKeyPress = DateTime.Now;
         }
     }
 }
