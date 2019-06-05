@@ -42,6 +42,7 @@ namespace FONZY
         /// <param name="e"></param>
         private void ProcessButton_Click(object sender, EventArgs e)
         {
+            addProductButton.PerformClick();
             GlobalUtilities.setCustomerName(nameTextBox.Text);
             GlobalUtilities.setCustomerAddress(addressTextBox.Text);
             GlobalUtilities.setCustomerContact(phoneTextBox.Text);

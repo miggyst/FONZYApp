@@ -65,6 +65,10 @@ namespace FONZY
         {
             try
             {
+                string filePath = (GlobalUtilities.getMasterFilePath()).Remove((GlobalUtilities.getMasterFilePath()).LastIndexOf('\\') + 1);
+                string[] dateArray = (DateTime.Now.Date.ToString("dd/MM/yyyy")).Split('/');
+                string[] timeArray = (DateTime.Now.ToString("h:mm:ss tt")).Split(':');
+                string wordFilePath = filePath + GlobalUtilities.getCustomerName() + "_" + dateArray[0] + "-" + dateArray[1] + "-" + dateArray[2] + "_" + timeArray[0] + "-" + timeArray[1] + "-" + timeArray[2] + ".docx";
                 Word.Application wordApp = new Microsoft.Office.Interop.Word.Application();
                 wordApp.ShowAnimation = false;
                 wordApp.Visible = false;
@@ -87,12 +91,12 @@ namespace FONZY
                 para.Range.Text = Environment.NewLine;
                 para.Range.Text = Environment.NewLine;
                 para.Range.Text = Environment.NewLine;
-                para.Range.Text = Environment.NewLine;
 
                 // Cashier, Time and Customer Number info
                 para.Range.Text = "Cashier: " + GlobalUtilities.getCashierName() + Environment.NewLine;
                 para.Range.Text = "Time: " + GlobalUtilities.getCashierName() + Environment.NewLine;
                 para.Range.Text = "Cust. Tel.: " + GlobalUtilities.getCashierName() + Environment.NewLine;
+                para.Range.Text = "Time: " + timeArray[0] + ":" + timeArray[1] + ":" + timeArray[2] + Environment.NewLine;
 
                 // Some indentation to align text
                 para.Range.Text = Environment.NewLine;
@@ -137,15 +141,6 @@ namespace FONZY
                 para.Range.Text = buildCharacterParagraphArray(62, "", 0, 0, GlobalUtilities.getTotalChange()) + Environment.NewLine;   // Change String.Format("{0:n}", GlobalUtilities.getTotalChange())
 
                 //Save the document
-                string filePath = (GlobalUtilities.getMasterFilePath()).Remove((GlobalUtilities.getMasterFilePath()).LastIndexOf('\\') + 1);
-                string[] dateTimeArray = (DateTime.Now.Date.ToString("dd/MM/yyyy")).Split('/');
-                string wordFilePath = filePath + GlobalUtilities.getCustomerName() + "_" + dateTimeArray[0] + "-" + dateTimeArray[1] + "-" + dateTimeArray[2] + ".docx";
-                int existCount = 2;
-                while (File.Exists(wordFilePath))
-                {
-                    wordFilePath = filePath + GlobalUtilities.getCustomerName() + "_" + dateTimeArray[0] + "-" + dateTimeArray[1] + "-" + dateTimeArray[2] + "ver" + existCount + ".docx";
-                    existCount++;
-                }
                 GlobalUtilities.setCustomerOrderFilePath(wordFilePath);
                 object documentFilePath = GlobalUtilities.getCustomerOrderFilePath();
                 wordDocument.SaveAs2(ref documentFilePath);
@@ -165,53 +160,60 @@ namespace FONZY
         /// </summary>
         private void updateCashierExcelSheet()
         {
-            // Opens Excel Sheet
-            Excel.Application xlApp = new Excel.Application();
-            xlApp.Visible = false;
-            xlApp.DisplayAlerts = false;
-            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(GlobalUtilities.getCashierAndEventFilePath(), 0, false, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "", true, false, 0, true, false, false);
-            Excel.Worksheet xlWorksheet = (Excel.Worksheet)xlWorkbook.Worksheets.get_Item(1);
-
-            // Edits Excel Sheet
-            Excel.Range xlRange = xlWorksheet.UsedRange;
-            int rowCount = xlRange.Rows.Count + 1;
-            string date = DateTime.Now.Date.ToString("dd/MM/yyyy");
-            string time = DateTime.Now.ToString("h:mm:ss tt");
-            List<string> keyList = new List<string>(GlobalUtilities.getCustomerTransactionDictionary().Keys);
-            double percentCash = Double.Parse(GlobalUtilities.getCashPayment()) / GlobalUtilities.getTotalCustomerPayment();
-            double percentDebit = Double.Parse(GlobalUtilities.getDebitPayment()) / GlobalUtilities.getTotalCustomerPayment();
-            double percentCredit = Double.Parse(GlobalUtilities.getCreditPayment()) / GlobalUtilities.getTotalCustomerPayment();
-            double percentCheck = Double.Parse(GlobalUtilities.getCheckPayment()) / GlobalUtilities.getTotalCustomerPayment();
-            double percentSalaryDeduction = Double.Parse(GlobalUtilities.getSalaryDeductionPayment()) / GlobalUtilities.getTotalCustomerPayment();
-
-            for (int i = 0; i < GlobalUtilities.getCustomerTransactionDictionary().Count; i++)
+            try
             {
-                List<string> customerOrder = GlobalUtilities.getProductInfoFromDictionary(GlobalUtilities.CUSTOMER, keyList[i]);
+                // Opens Excel Sheet
+                Excel.Application xlApp = new Excel.Application();
+                xlApp.Visible = false;
+                xlApp.DisplayAlerts = false;
+                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(GlobalUtilities.getCashierAndEventFilePath(), 0, false, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "", true, false, 0, true, false, false);
+                Excel.Worksheet xlWorksheet = (Excel.Worksheet)xlWorkbook.Worksheets.get_Item(1);
 
-                xlWorksheet.Cells[rowCount + i, 1] = GlobalUtilities.getCustomerName();
-                xlWorksheet.Cells[rowCount + i, 2] = keyList[i];
-                xlWorksheet.Cells[rowCount + i, 3] = customerOrder[1];
-                xlWorksheet.Cells[rowCount + i, 4] = customerOrder[2];
-                xlWorksheet.Cells[rowCount + i, 5] = customerOrder[3];
-                xlWorksheet.Cells[rowCount + i, 6] = customerOrder[4];
-                xlWorksheet.Cells[rowCount + i, 7] = Double.Parse(customerOrder[4]) * percentCash;
-                xlWorksheet.Cells[rowCount + i, 8] = Double.Parse(customerOrder[4]) * percentDebit;
-                xlWorksheet.Cells[rowCount + i, 9] = Double.Parse(customerOrder[4]) * percentDebit;
-                xlWorksheet.Cells[rowCount + i, 10] = Double.Parse(customerOrder[4]) * percentCredit;
-                xlWorksheet.Cells[rowCount + i, 11] = Double.Parse(customerOrder[4]) * percentCheck;
-                xlWorksheet.Cells[rowCount + i, 12] = Double.Parse(customerOrder[4]) * percentSalaryDeduction;
-                xlWorksheet.Cells[rowCount + i, 13] = date;
-                xlWorksheet.Cells[rowCount + i, 14] = time;
+                // Edits Excel Sheet
+                Excel.Range xlRange = xlWorksheet.UsedRange;
+                int rowCount = xlRange.Rows.Count + 1;
+                string date = DateTime.Now.Date.ToString("dd/MM/yyyy");
+                string time = DateTime.Now.ToString("h:mm:ss tt");
+                List<string> keyList = new List<string>(GlobalUtilities.getCustomerTransactionDictionary().Keys);
+                double percentCash = Double.Parse(GlobalUtilities.getCashPayment()) / GlobalUtilities.getTotalCustomerPayment();
+                double percentDebit = Double.Parse(GlobalUtilities.getDebitPayment()) / GlobalUtilities.getTotalCustomerPayment();
+                double percentCredit = Double.Parse(GlobalUtilities.getCreditPayment()) / GlobalUtilities.getTotalCustomerPayment();
+                double percentCheck = Double.Parse(GlobalUtilities.getCheckPayment()) / GlobalUtilities.getTotalCustomerPayment();
+                double percentSalaryDeduction = Double.Parse(GlobalUtilities.getSalaryDeductionPayment()) / GlobalUtilities.getTotalCustomerPayment();
+
+                for (int i = 0; i < GlobalUtilities.getCustomerTransactionDictionary().Count; i++)
+                {
+                    List<string> customerOrder = GlobalUtilities.getProductInfoFromDictionary(GlobalUtilities.CUSTOMER, keyList[i]);
+
+                    xlWorksheet.Cells[rowCount + i, 1] = GlobalUtilities.getCustomerName();
+                    xlWorksheet.Cells[rowCount + i, 2] = keyList[i];
+                    xlWorksheet.Cells[rowCount + i, 3] = customerOrder[1];
+                    xlWorksheet.Cells[rowCount + i, 4] = customerOrder[2];
+                    xlWorksheet.Cells[rowCount + i, 5] = customerOrder[3];
+                    xlWorksheet.Cells[rowCount + i, 6] = customerOrder[4];
+                    xlWorksheet.Cells[rowCount + i, 7] = Double.Parse(customerOrder[4]) * percentCash;
+                    xlWorksheet.Cells[rowCount + i, 8] = Double.Parse(customerOrder[4]) * percentDebit;
+                    xlWorksheet.Cells[rowCount + i, 9] = Double.Parse(customerOrder[4]) * percentDebit;
+                    xlWorksheet.Cells[rowCount + i, 10] = Double.Parse(customerOrder[4]) * percentCredit;
+                    xlWorksheet.Cells[rowCount + i, 11] = Double.Parse(customerOrder[4]) * percentCheck;
+                    xlWorksheet.Cells[rowCount + i, 12] = Double.Parse(customerOrder[4]) * percentSalaryDeduction;
+                    xlWorksheet.Cells[rowCount + i, 13] = date;
+                    xlWorksheet.Cells[rowCount + i, 14] = time;
+                }
+
+                // Saves Excel sheet
+                xlWorkbook.SaveAs(GlobalUtilities.getCashierAndEventFilePath());
+                xlWorkbook.Close(true, Type.Missing, Type.Missing);
+                xlApp.Quit();
+
+                Marshal.ReleaseComObject(xlWorksheet);
+                Marshal.ReleaseComObject(xlWorkbook);
+                Marshal.ReleaseComObject(xlApp);
             }
-
-            // Saves Excel sheet
-            xlWorkbook.SaveAs(GlobalUtilities.getCashierAndEventFilePath());
-            xlWorkbook.Close(true, Type.Missing, Type.Missing);
-            xlApp.Quit();
-
-            Marshal.ReleaseComObject(xlWorksheet);
-            Marshal.ReleaseComObject(xlWorkbook);
-            Marshal.ReleaseComObject(xlApp);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
