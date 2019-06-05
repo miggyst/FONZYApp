@@ -52,10 +52,23 @@ namespace FONZY
         /// <param name="e"></param>
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            Word.Application wordApp = new Word.Application { Visible = false };
-            Word.Document wordDocument = wordApp.Documents.Open(GlobalUtilities.getCustomerOrderFilePath(), ReadOnly: false, Visible: false);
-            wordDocument.Activate();
-            wordDocument.PrintOut();
+            try
+            {
+                object missing = System.Reflection.Missing.Value;
+                Word.Application wordApp = new Word.Application { Visible = false };
+                Word.Document wordDocument = wordApp.Documents.Open(GlobalUtilities.getCustomerOrderFilePath(), ReadOnly: false, Visible: false);
+                wordDocument.Activate();
+                wordDocument.PrintOut();
+
+                wordDocument.Close(ref missing, ref missing, ref missing);
+                wordDocument = null;
+                wordApp.Quit(ref missing, ref missing, ref missing);
+                wordApp = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -87,14 +100,12 @@ namespace FONZY
                 rng.Select();
 
                 // There are a total of 77 possible characters per line
-                para.Range.Text = Environment.NewLine;
-                para.Range.Text = Environment.NewLine;
-                para.Range.Text = Environment.NewLine;
+                // Indentation to align the Word doc text
                 para.Range.Text = Environment.NewLine;
 
                 // Cashier, Time and Customer Number info
                 para.Range.Text = "Cashier: " + GlobalUtilities.getCashierName() + Environment.NewLine;
-                para.Range.Text = "Time: " + GlobalUtilities.getCashierName() + Environment.NewLine;
+                para.Range.Text = "Cust. Add.: " + GlobalUtilities.getCustomerAddress() + Environment.NewLine;
                 para.Range.Text = "Cust. Tel.: " + GlobalUtilities.getCashierName() + Environment.NewLine;
                 para.Range.Text = "Time: " + timeArray[0] + ":" + timeArray[1] + ":" + timeArray[2] + Environment.NewLine;
 
@@ -102,10 +113,10 @@ namespace FONZY
                 para.Range.Text = Environment.NewLine;
 
                 // Customer details: Customer Name, address, TIN, Business Style, Data, Terms, OSCA/PWD ID No., Cardholder's Signature
-                para.Range.Text = buildCharacterParagraphArray(11, GlobalUtilities.getCustomerName(), 37, 6, DateTime.Now.Date.ToString("dd/MM/yyyy")) + Environment.NewLine;
-                para.Range.Text = buildCharacterParagraphArray(11, GlobalUtilities.getCustomerAddress(), 37, 7, GlobalUtilities.getCustomerTerms()) + Environment.NewLine;
-                para.Range.Text = buildCharacterParagraphArray(8, GlobalUtilities.getCustomerTIN(), 40, 17, GlobalUtilities.getCustomerOSCA()) + Environment.NewLine;
-                para.Range.Text = buildCharacterParagraphArray(16, GlobalUtilities.getCustomerBusinessStyle(), 32, 19, "") + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(11, GlobalUtilities.getCustomerName(), 38, 10, DateTime.Now.Date.ToString("dd/MM/yyyy")) + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(11, GlobalUtilities.getCustomerAddress(), 38, 11, GlobalUtilities.getCustomerTerms()) + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(8, GlobalUtilities.getCustomerTIN(), 41, 21, GlobalUtilities.getCustomerOSCA()) + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(17, GlobalUtilities.getCustomerBusinessStyle(), 33, 19, "") + Environment.NewLine;
 
                 // Customer order details title
                 para.Range.Text = Environment.NewLine;
@@ -133,12 +144,12 @@ namespace FONZY
                 para.Range.Text = buildCharacterParagraphArray(68, "", 0, 0, vatSales.ToString()) + Environment.NewLine;
                 para.Range.Text = Environment.NewLine;
                 para.Range.Text = Environment.NewLine;
-                para.Range.Text = buildCharacterParagraphArray(68, "", 0, 0, GlobalUtilities.getTotalCost().ToString()) + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(68, "", 0, 0, String.Format("{0:n}", GlobalUtilities.getTotalCost())) + Environment.NewLine;
                 para.Range.Text = buildCharacterParagraphArray(68, "", 0, 0, vat.ToString()) + Environment.NewLine;
-                para.Range.Text = buildCharacterParagraphArray(68, "", 0, 0, GlobalUtilities.getTotalCost().ToString()) + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(68, "", 0, 0, String.Format("{0:n}", GlobalUtilities.getTotalCost())) + Environment.NewLine;
                 para.Range.Text = Environment.NewLine;
-                para.Range.Text = buildCharacterParagraphArray(62, "", 0, 0, GlobalUtilities.getTotalCustomerPayment().ToString()) + Environment.NewLine;
-                para.Range.Text = buildCharacterParagraphArray(62, "", 0, 0, GlobalUtilities.getTotalChange()) + Environment.NewLine;   // Change String.Format("{0:n}", GlobalUtilities.getTotalChange())
+                para.Range.Text = buildCharacterParagraphArray(62, "", 0, 0, String.Format("{0:n}", GlobalUtilities.getTotalCustomerPayment())) + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(62, "", 0, 0, String.Format("{0:n}", Double.Parse(GlobalUtilities.getTotalChange()))) + Environment.NewLine;
 
                 //Save the document
                 GlobalUtilities.setCustomerOrderFilePath(wordFilePath);
@@ -386,7 +397,7 @@ namespace FONZY
             List<string> paraList = new List<string>();
             paraList.Add("                                              Total  ");
             char[] totalQuantity = GlobalUtilities.getTotalQuantity().ToCharArray();
-            char[] totalCost = GlobalUtilities.getTotalCost().ToString().ToCharArray();
+            char[] totalCost = String.Format("{0:n}", GlobalUtilities.getTotalCost()).ToCharArray();
 
             for (int i = 0; i < 15; i++)
             {

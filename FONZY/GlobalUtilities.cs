@@ -320,7 +320,7 @@ namespace FONZY
                     productInformationList.Add(customerTransactionDictionary[userInputBarCode][0]); // Product Description
                     productInformationList.Add(customerTransactionDictionary[userInputBarCode][1]); // Price
                     productInformationList.Add(customerTransactionDictionary[userInputBarCode][2]); // Quantity
-                    productInformationList.Add(customerTransactionDictionary[userInputBarCode][4]); // Amount
+                    productInformationList.Add(String.Format("{0:n}", Double.Parse(customerTransactionDictionary[userInputBarCode][4]))); // Amount
                 }
             }
             return productInformationList;
