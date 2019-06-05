@@ -15,11 +15,11 @@ namespace FONZY
 {
     public partial class InventorySaleDetails : Form
     {
-        List<string> keyList = new List<string>(GlobalUtilities.getMasterListDictionary().Keys);
+        private List<string> keyList = new List<string>(GlobalUtilities.getMasterListDictionary().Keys);
         private Microsoft.Office.Interop.Excel.Application xlApp = new Excel.Application();
         private Excel.Workbook xlWorkbook;
         private Excel.Worksheet xlWorksheet;
-        DateTime lastKeyPress = DateTime.Now;
+        private DateTime lastKeyPress = DateTime.Now;
 
         public InventorySaleDetails()
         {

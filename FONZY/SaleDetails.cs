@@ -12,7 +12,9 @@ namespace FONZY
 {
 	public partial class SaleDetails : Form
 	{
-		public SaleDetails()
+        private DateTime lastKeyPress = DateTime.Now;
+
+        public SaleDetails()
 		{
 			InitializeComponent();
 		}
@@ -248,6 +250,11 @@ namespace FONZY
             {
                 addProductButton.PerformClick();
             }
+            if (((TimeSpan)(DateTime.Now - lastKeyPress)).TotalMilliseconds > 20)
+            {
+                addProductButton.PerformClick();
+            }
+            lastKeyPress = DateTime.Now;
         }
 
         /// <summary>

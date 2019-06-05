@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using Word = Microsoft.Office.Interop.Word;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace FONZY
 {
@@ -64,10 +65,6 @@ namespace FONZY
         {
             try
             {
-                string filePath = (GlobalUtilities.getMasterFilePath()).Remove((GlobalUtilities.getMasterFilePath()).LastIndexOf('\\') + 1);
-                string[] dateTimeArray = (DateTime.Now.Date.ToString("dd/MM/yyyy")).Split('/');
-                GlobalUtilities.setCustomerOrderFilePath(filePath + GlobalUtilities.getCustomerName() + "_" + dateTimeArray[0] + "-" + dateTimeArray[1] + "-" + dateTimeArray[2] + ".docx");
-
                 Word.Application wordApp = new Microsoft.Office.Interop.Word.Application();
                 wordApp.ShowAnimation = false;
                 wordApp.Visible = false;
@@ -101,10 +98,10 @@ namespace FONZY
                 para.Range.Text = Environment.NewLine;
 
                 // Customer details: Customer Name, address, TIN, Business Style, Data, Terms, OSCA/PWD ID No., Cardholder's Signature
-                para.Range.Text = buildCharacterParagraphArray(10, GlobalUtilities.getCustomerName(), 38, 7, DateTime.Now.Date.ToString("dd/MM/yyyy")) + Environment.NewLine;
-                para.Range.Text = buildCharacterParagraphArray(10, GlobalUtilities.getCustomerAddress(), 38, 8, GlobalUtilities.getCustomerTerms()) + Environment.NewLine;
-                para.Range.Text = buildCharacterParagraphArray(7, GlobalUtilities.getCustomerTIN(), 41, 18, GlobalUtilities.getCustomerOSCA()) + Environment.NewLine;
-                para.Range.Text = buildCharacterParagraphArray(15, GlobalUtilities.getCustomerBusinessStyle(), 33, 20, "") + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(11, GlobalUtilities.getCustomerName(), 37, 6, DateTime.Now.Date.ToString("dd/MM/yyyy")) + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(11, GlobalUtilities.getCustomerAddress(), 37, 7, GlobalUtilities.getCustomerTerms()) + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(8, GlobalUtilities.getCustomerTIN(), 40, 17, GlobalUtilities.getCustomerOSCA()) + Environment.NewLine;
+                para.Range.Text = buildCharacterParagraphArray(16, GlobalUtilities.getCustomerBusinessStyle(), 32, 19, "") + Environment.NewLine;
 
                 // Customer order details title
                 para.Range.Text = Environment.NewLine;
@@ -139,7 +136,17 @@ namespace FONZY
                 para.Range.Text = buildCharacterParagraphArray(62, "", 0, 0, GlobalUtilities.getTotalCustomerPayment().ToString()) + Environment.NewLine;
                 para.Range.Text = buildCharacterParagraphArray(62, "", 0, 0, GlobalUtilities.getTotalChange()) + Environment.NewLine;   // Change String.Format("{0:n}", GlobalUtilities.getTotalChange())
 
-                //Save the document  
+                //Save the document
+                string filePath = (GlobalUtilities.getMasterFilePath()).Remove((GlobalUtilities.getMasterFilePath()).LastIndexOf('\\') + 1);
+                string[] dateTimeArray = (DateTime.Now.Date.ToString("dd/MM/yyyy")).Split('/');
+                string wordFilePath = filePath + GlobalUtilities.getCustomerName() + "_" + dateTimeArray[0] + "-" + dateTimeArray[1] + "-" + dateTimeArray[2] + ".docx";
+                int existCount = 2;
+                while (File.Exists(wordFilePath))
+                {
+                    wordFilePath = filePath + GlobalUtilities.getCustomerName() + "_" + dateTimeArray[0] + "-" + dateTimeArray[1] + "-" + dateTimeArray[2] + "ver" + existCount + ".docx";
+                    existCount++;
+                }
+                GlobalUtilities.setCustomerOrderFilePath(wordFilePath);
                 object documentFilePath = GlobalUtilities.getCustomerOrderFilePath();
                 wordDocument.SaveAs2(ref documentFilePath);
                 wordDocument.Close(ref missing, ref missing, ref missing);
