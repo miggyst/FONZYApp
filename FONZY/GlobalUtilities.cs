@@ -231,7 +231,7 @@ namespace FONZY
 
         public static void setTotalCost(double userInputTotalCost)
         {
-            totalCost = userInputTotalCost;
+            totalCost = Math.Round(userInputTotalCost, 2);
         }
 
         public static void setTotalQuantity(string userInputTotalQuantity)
@@ -241,12 +241,12 @@ namespace FONZY
 
         public static void setTotalCustomerPayment()
         {
-            totalCustomerPayment = Double.Parse(cashPayment) + Double.Parse(creditPayment) + Double.Parse(debitPayment) + Double.Parse(checkPayment) + Double.Parse(salaryDeductionPayment);
+            totalCustomerPayment = Math.Round((Double.Parse(cashPayment) + Double.Parse(creditPayment) + Double.Parse(debitPayment) + Double.Parse(checkPayment) + Double.Parse(salaryDeductionPayment)), 2);
         }
 
         public static void setTotalChange()
         {
-            totalChange = (-1 * (totalCost - (Double.Parse(cashPayment) + Double.Parse(creditPayment) + Double.Parse(debitPayment) + Double.Parse(checkPayment) + Double.Parse(salaryDeductionPayment)))).ToString();
+            totalChange = Math.Round((-1 * (totalCost - (Double.Parse(cashPayment) + Double.Parse(creditPayment) + Double.Parse(debitPayment) + Double.Parse(checkPayment) + Double.Parse(salaryDeductionPayment)))), 2).ToString();
         }
 
         //----- Other Methods -----//

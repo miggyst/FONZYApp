@@ -186,11 +186,11 @@ namespace FONZY
                 string date = DateTime.Now.Date.ToString("dd/MM/yyyy");
                 string time = DateTime.Now.ToString("h:mm:ss tt");
                 List<string> keyList = new List<string>(GlobalUtilities.getCustomerTransactionDictionary().Keys);
-                double percentCash = Double.Parse(GlobalUtilities.getCashPayment()) / GlobalUtilities.getTotalCustomerPayment();
-                double percentDebit = Double.Parse(GlobalUtilities.getDebitPayment()) / GlobalUtilities.getTotalCustomerPayment();
-                double percentCredit = Double.Parse(GlobalUtilities.getCreditPayment()) / GlobalUtilities.getTotalCustomerPayment();
-                double percentCheck = Double.Parse(GlobalUtilities.getCheckPayment()) / GlobalUtilities.getTotalCustomerPayment();
-                double percentSalaryDeduction = Double.Parse(GlobalUtilities.getSalaryDeductionPayment()) / GlobalUtilities.getTotalCustomerPayment();
+                double percentCash = Math.Round((Double.Parse(GlobalUtilities.getCashPayment()) / GlobalUtilities.getTotalCustomerPayment()), 2);
+                double percentDebit = Math.Round((Double.Parse(GlobalUtilities.getDebitPayment()) / GlobalUtilities.getTotalCustomerPayment()), 2);
+                double percentCredit = Math.Round((Double.Parse(GlobalUtilities.getCreditPayment()) / GlobalUtilities.getTotalCustomerPayment()), 2);
+                double percentCheck = Math.Round((Double.Parse(GlobalUtilities.getCheckPayment()) / GlobalUtilities.getTotalCustomerPayment()), 2);
+                double percentSalaryDeduction = Math.Round((Double.Parse(GlobalUtilities.getSalaryDeductionPayment()) / GlobalUtilities.getTotalCustomerPayment()), 2);
 
                 for (int i = 0; i < GlobalUtilities.getCustomerTransactionDictionary().Count; i++)
                 {
@@ -202,12 +202,12 @@ namespace FONZY
                     xlWorksheet.Cells[rowCount + i, 4] = customerOrder[2];
                     xlWorksheet.Cells[rowCount + i, 5] = customerOrder[3];
                     xlWorksheet.Cells[rowCount + i, 6] = customerOrder[4];
-                    xlWorksheet.Cells[rowCount + i, 7] = Double.Parse(customerOrder[4]) * percentCash;
-                    xlWorksheet.Cells[rowCount + i, 8] = Double.Parse(customerOrder[4]) * percentDebit;
-                    xlWorksheet.Cells[rowCount + i, 9] = Double.Parse(customerOrder[4]) * percentDebit;
-                    xlWorksheet.Cells[rowCount + i, 10] = Double.Parse(customerOrder[4]) * percentCredit;
-                    xlWorksheet.Cells[rowCount + i, 11] = Double.Parse(customerOrder[4]) * percentCheck;
-                    xlWorksheet.Cells[rowCount + i, 12] = Double.Parse(customerOrder[4]) * percentSalaryDeduction;
+                    xlWorksheet.Cells[rowCount + i, 7] = GlobalUtilities.getCustomerType();
+                    xlWorksheet.Cells[rowCount + i, 8] = GlobalUtilities.getCashPayment();
+                    xlWorksheet.Cells[rowCount + i, 9] = GlobalUtilities.getDebitPayment();
+                    xlWorksheet.Cells[rowCount + i, 10] = GlobalUtilities.getCreditPayment();
+                    xlWorksheet.Cells[rowCount + i, 11] = GlobalUtilities.getCheckPayment();
+                    xlWorksheet.Cells[rowCount + i, 12] = GlobalUtilities.getSalaryDeductionPayment();
                     xlWorksheet.Cells[rowCount + i, 13] = date;
                     xlWorksheet.Cells[rowCount + i, 14] = time;
                 }
